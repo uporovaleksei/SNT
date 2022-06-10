@@ -1,3 +1,6 @@
 leha log
 
 leha svetaki log
+
+leha ne log
+
