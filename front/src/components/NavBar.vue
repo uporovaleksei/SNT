@@ -7,7 +7,9 @@
                     </a>
                 </div>
                 <div class="navbar__menu">
-                    <div class="menu__body">
+                    <div 
+                      :class="['menu__body', {'active': menuIsOpen}]"
+                    >
                         <ul class="menu__list">
                             <li class="menu__item" v-for="menuItem in menuItems" :key="menuItem">
                                 <a href="#" class="menu__link">{{menuItem}}</a>
@@ -15,19 +17,22 @@
                         </ul>
                     </div>
                 </div>
-                <div class="menu__icon" id="menu__icon">
+                <div 
+                  @click="menuIsOpen = !menuIsOpen" 
+                  :class="['menu__icon', {'active': menuIsOpen}]"
+                >
                     <span></span>
                 </div>
                 <div class="navbar__actions">
                     <div class="actions__login">
-                        <a href="#" class="login__link" id="link__login">Войти</a>
+                        <a href="#" class="login__link">Войти</a>
                     </div>
                     <div class="actions__icon">
-                        <img src="../assets/user.svg" alt="user" id="user__icon">
+                        <img src="../assets/user.svg" alt="user">
                     </div>
                 </div>
             </div>
-               <SubNav/>
+            <SubNav/>
         </div>
 </template>
 
@@ -39,10 +44,16 @@ export default {
   },
         data() {
             return {
-                menuItems:["Главная","Новости","Документы","Правление","Контакты","FAQ",]
+                menuItems:["Главная","Новости","Документы","Правление","Контакты","FAQ"],
+                menuIsOpen: false
+            
             }
         },
-        
+        watch: {
+          menuIsOpen(){
+            document.body.classList.toggle('lock')
+          }
+        }
     }
 </script>
 <style>
