@@ -1,26 +1,29 @@
 <template>
   <div>
-    <NavBar/>
-    <SubNav/>
-    <News/>
-    <Footer/>
+    <MainLayout>
+      <News/>
+      <Footer/>
+    </MainLayout>
   </div>
 </template>
 
 <script>
-  import News from "@/components/NewsItem.vue"
-  import Footer from "@/components/Footer.vue"
-  export default {
-    components: {
-      News,
-      Footer,
-    },
-    data() {
-      return {
-        
-      }
-    },
-  }
+import MainLayout from "@/components/layouts/Main"
+import News from "@/components/NewsItem"
+import Footer from "@/components/Footer"
+
+export default {
+  components: {
+    News,
+    Footer,
+    MainLayout
+  },
+  data() {
+    return {
+      
+    }
+  },
+}
 </script>
 
 

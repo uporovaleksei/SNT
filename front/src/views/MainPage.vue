@@ -1,40 +1,44 @@
 <template>
   <div>
-    <div class="header">
-      <div class="header__container">
-        <div class="header__title">
-          <h1>СНТ Земляника</h1>
-        </div>
-        <div class="header__text">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima optio debitis doloribus inventore voluptate
-            itaque nam maiores, molestias ratione at nesciunt voluptatem quis fugiat architecto distinctio facilis
-            accusantium aspernatur perspiciatis.</p>
+    <MainLayout>
+      <div class="header">
+        <div class="header__container">
+          <div class="header__title">
+            <h1>СНТ Земляника</h1>
+          </div>
+          <div class="header__text">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima optio debitis doloribus inventore voluptate
+              itaque nam maiores, molestias ratione at nesciunt voluptatem quis fugiat architecto distinctio facilis
+              accusantium aspernatur perspiciatis.</p>
+          </div>
         </div>
       </div>
-    </div>
-    <News/>
-    <SliderBar/>
-    <Comments/>
-    <Location/>
-    <Footer/>
+      <News/>
+      <SliderBar/>
+      <Comments/>
+      <Location/>
+      <Footer/>
+    </MainLayout>
   </div>
 </template>
 
 <script>
-  import News from "@/components/NewsItem.vue"
-  import SliderBar from "@/components/SliderBar.vue"
-  import Comments from "@/components/Comments.vue"
-  import Location from "@/components/Location.vue"
-  import Footer from "@/components/Footer.vue"
-  export default {
-    components: {
-      News,
-      SliderBar,
-      Comments,
-      Location,
-      Footer,
-    },
-  }
+import MainLayout from "@/components/layouts/Main"
+import News from "@/components/NewsItem.vue"
+import SliderBar from "@/components/SliderBar.vue"
+import Comments from "@/components/Comments.vue"
+import Location from "@/components/Location.vue"
+import Footer from "@/components/Footer.vue"
+export default {
+  components: {
+    News,
+    SliderBar,
+    Comments,
+    Location,
+    Footer,
+    MainLayout
+  },
+}
 </script>
 
 
