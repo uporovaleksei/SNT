@@ -12,7 +12,7 @@
                             <li 
                             class="menu__item" 
                             v-for="menuItem in menuItems" 
-                            :key="menuItem">
+                            :key="menuItem.route">
                                 <router-link 
                                 class="menu__link" 
                                 :to="menuItem.route"
@@ -30,7 +30,20 @@
                 </div>
                 <div class="navbar__actions">
                     <div class="actions__login">
-                         <router-link class="login__link" to="/authorization">Войти</router-link>
+                        <span v-if="username">{{username}}</span>
+                        <span 
+                            @click="logout"
+                            v-if="username"
+                        >
+                            Выйти
+                        </span>
+                        <router-link 
+                            v-else
+                            class="login__link" 
+                            to="/authorization"
+                        >
+                            Войти
+                        </router-link>
                     </div>
                     <div class="actions__icon">
                         <img src="../assets/user.svg" alt="user">
@@ -43,6 +56,7 @@
 
 <script>
 import SubNav from "@/components/SubNav.vue"
+
 export default {
     components: {
     SubNav
@@ -77,6 +91,16 @@ export default {
                     ],
                 menuIsOpen: false
             
+            }
+        },
+        computed: {
+            username(){
+                return this.$store.state.user?.name
+            }
+        },
+        methods: {
+            logout(){
+                this.$store.dispatch("logout")
             }
         },
         watch: {

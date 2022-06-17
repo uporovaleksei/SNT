@@ -8,19 +8,45 @@
             <h1>Регистрация</h1>
           </div>
           <div class="reg__login">
-            <input type="text"  placeholder="Логин">
+            <input 
+              type="text"  
+              placeholder="Логин"
+              v-model="login"
+            >
           </div>
           <div class="reg__password">
-            <input type="password" placeholder="Пароль">
+            <input 
+              type="password" 
+              placeholder="Пароль"
+              v-model="password1"
+            >
           </div>
           <div class="reg__password">
-            <input type="password" placeholder="Повторите пароль">
+            <input 
+              type="password" 
+              placeholder="Повторите пароль"
+              v-model="password2"
+            >
+          </div>
+          <div class="reg__password">
+            <input 
+              type="text" 
+              placeholder="name"
+              v-model="name"
+            >
+          </div>
+          <div class="reg__password">
+            <input 
+              type="text" 
+              placeholder="phone"
+              v-model="phone"
+            >
           </div>
           <div class="reg__reg">
              <router-link to="/authorization">Авторизироваться</router-link>
           </div>
           <div class="reg__submit">
-            <button> Зарегистрироваться </button>
+            <button @click="reg"> Зарегистрироваться </button>
           </div>
         </div>
       </div>
@@ -35,6 +61,50 @@
     name:'Registration',
     components:{
       AuthLayout
+    },
+    data() {
+      return {
+        login: null,
+        password1: null,
+        password2: null,
+        name: null,
+        phone: null
+      }
+    },
+    methods: {
+      async reg(){
+        if(!this.login){
+          alert("Введите логин")
+          return
+        }
+        if(!this.password1 !== !this.password2){
+          alert("Пароли не совпадают")
+          return
+        }
+        if(this.password1?.length < 1){
+          alert("Пароль должен содержать минимум 8 символов")
+          return
+        }
+        if(!this.name){
+          alert("Введите имя")
+          return
+        }
+        if(!this.phone){
+          alert("Введите номер")
+          return
+        }
+        const data = await this.$store.dispatch("reg", {
+          login: this.login,
+          password: this.password1,
+          name: this.name,
+          phone: this.phone
+        })
+        if(data?.error){
+          alert(data.error)
+          return
+        }
+        this.$router.push({name: 'main'})
+      }
     }
   }
 </script>

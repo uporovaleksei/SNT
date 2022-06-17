@@ -7,17 +7,25 @@
           <div class="auth__title">
             <h1>Авторизация</h1>
           </div>
-          <div class="auth__login">
-            <input type="text"  placeholder="Логин">
+          <div class="reg__login">
+            <input 
+              type="text"  
+              placeholder="Логин"
+              v-model="user"
+            >
           </div>
-          <div class="auth__password">
-            <input type="password" placeholder="Пароль">
+          <div class="reg__password">
+            <input 
+              type="password" 
+              placeholder="Пароль"
+              v-model="password"
+            >
           </div>
           <div class="auth__reg">
              <router-link to="/registration">Зарегистрироваться</router-link>
           </div>
           <div class="auth__submit">
-            <button> Войти </button>
+            <button @click="login"> Войти </button>
           </div>
         </div>
       </div>
@@ -32,6 +40,25 @@ import AuthLayout from "@/layouts/Auth.vue";
     name: 'Authorization',
     components:{
       AuthLayout
+    },
+    data() {
+      return {
+        user: null,
+        password: null,
+      }
+    },
+    methods: {
+      async login(){
+        const data = await this.$store.dispatch("login", {
+          login: this.user,
+          password: this.password,
+        })
+        if(data?.error){
+          alert(data.error)
+          return
+        }
+        this.$router.push({name: 'main'})
+      }
     }
     
   }

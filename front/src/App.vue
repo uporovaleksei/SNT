@@ -1,14 +1,28 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view v-if="ready"></router-view>
   </div>
 </template>
 <script>
+import api from "@/api"
 
 export default {
   components: {
     
   },
+  data() {
+    return {
+      ready: false
+    }
+  },
+  async created(){
+    try{
+      const data = await api.get("user")
+      this.$store.commit("setUser", data)
+    }finally{
+      this.ready = true
+    }
+  }
 }
 
 </script>
