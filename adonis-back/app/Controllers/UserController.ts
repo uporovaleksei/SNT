@@ -9,15 +9,15 @@ export default class UserController {
     return login + this.SECRET + password
   }
 
-  public async user({session}){
-    return session.get("user")
+  public async user({ session }) {
+    return session.get('user')
   }
 
   public async login({ request, session }: HttpContextContract) {
     const { login, password } = request.body()
     const hash = this.hash(login, password)
     const user = await Database.from(this.tb).where('hash', hash).first()
-    if (!user) return {error: "Неверные данные"}
+    if (!user) return { error: 'Неверные данные' }
     session.put('user', user)
     return user
   }
@@ -29,7 +29,7 @@ export default class UserController {
   public async reg({ request, session }: HttpContextContract) {
     const { login, password, name, phone } = request.body()
     const is_exist = await Database.from(this.tb).where('login', login).first()
-    if (is_exist) return {error: "Пользователь с таким логином уже существует"}
+    if (is_exist) return { error: 'Пользователь с таким логином уже существует' }
     const hash = this.hash(login, password)
     const user = {
       login,
