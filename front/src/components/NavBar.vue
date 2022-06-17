@@ -30,7 +30,7 @@
                 </div>
                 <div class="navbar__actions">
                     <div class="actions__login">
-                        <a href="#" class="login__link">Войти</a>
+                         <router-link class="login__link" to="/authorization">Войти</router-link>
                     </div>
                     <div class="actions__icon">
                         <img src="../assets/user.svg" alt="user">
@@ -68,11 +68,11 @@ export default {
                     },
                      {
                         name:"Правление",
-                        route: "/governing"
+                        route: "/government"
                     },
                      {
                         name:"Контакты",
-                        route: "/contacts"
+                        route: "/сontacts"
                     },
                     ],
                 menuIsOpen: false

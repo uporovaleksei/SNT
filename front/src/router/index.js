@@ -2,6 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MainPage from '../views/MainPage.vue'
 import NewsPage from '../views/NewsPage.vue'
+import Documents from '../views/Documents.vue'
+import FAQ from '../views/FAQ.vue'
+import Government from '../views/Government.vue'
+import Contacts from '../views/Contacts.vue'
+import Authorization from '../views/Authorization.vue'
+import Registration from '../views/Registration.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +23,36 @@ const routes = [
     component: NewsPage
   },
   {
+    path: '/documents',
+    name: 'documents',
+    component: Documents
+  },
+  {
+    path: '/faq',
+    name: 'FAQ',
+    component: FAQ
+  },
+  {
+    path: '/government',
+    name: 'Government',
+    component: Government
+  },
+  {
+    path: '/сontacts',
+    name: 'Contacts',
+    component: Contacts
+  },
+  {
+    path: '/authorization',
+    name: 'Authorization',
+    component: Authorization
+  },
+  {
+    path: '/registration',
+    name: 'Registration',
+    component: Registration
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
@@ -27,6 +63,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: "history",
   routes
 })
 

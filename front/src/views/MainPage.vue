@@ -17,25 +17,22 @@
       <SliderBar/>
       <Comments/>
       <Location/>
-      <Footer/>
     </MainLayout>
   </div>
 </template>
 
 <script>
-import MainLayout from "@/components/layouts/Main"
+import MainLayout from "@/layouts/Main"
 import News from "@/components/NewsItem.vue"
 import SliderBar from "@/components/SliderBar.vue"
 import Comments from "@/components/Comments.vue"
 import Location from "@/components/Location.vue"
-import Footer from "@/components/Footer.vue"
 export default {
   components: {
     News,
     SliderBar,
     Comments,
     Location,
-    Footer,
     MainLayout
   },
 }

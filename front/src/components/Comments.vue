@@ -3,7 +3,7 @@
         <div class="reviews">
             <div class="reviews__container">
                 <div class="reviews__title">
-                    Отзывы и комментарии
+                    Комментарии
                 </div>
                 <div class="reviews__body">
                     <div class="reviews__commentary">

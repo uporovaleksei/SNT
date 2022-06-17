@@ -8,14 +8,12 @@
 </template>
 
 <script>
-import MainLayout from "@/components/layouts/Main"
-import News from "@/components/NewsItem"
-import Footer from "@/components/Footer"
+import MainLayout from "@/layouts/Main.vue"
+import News from "@/components/NewsItem.vue"
 
 export default {
   components: {
     News,
-    Footer,
     MainLayout
   },
   data() {
