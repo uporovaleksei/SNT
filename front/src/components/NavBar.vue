@@ -30,12 +30,10 @@
                 </div>
                 <div class="navbar__actions">
                     <div class="actions__login">
-                        <span v-if="username">{{username}}</span>
-                        <span 
-                            @click="logout"
-                            v-if="username"
+                        <span class="actions__username" 
+                        v-if="username"
                         >
-                            Выйти
+                        {{username}}
                         </span>
                         <router-link 
                             v-else
@@ -48,6 +46,13 @@
                     <div class="actions__icon">
                         <img src="../assets/user.svg" alt="user">
                     </div>
+                                            <span 
+                            @click="logout"
+                            v-if="username"
+                            class="actions__exit" 
+                        >
+                            Выйти
+                        </span>
                 </div>
             </div>
             <SubNav/>
@@ -220,6 +225,26 @@ export default {
 .actions__icon {
     width: 20px;
     transition: 0.3s;
+}
+
+.actions__username{
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.actions__username:hover{
+    color: #d3e1e0;
+}
+.actions__exit{
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.actions__exit:hover{
+    color: #d3e1e0;
+    transform: scale(0.9);
 }
 
 #user__icon {
