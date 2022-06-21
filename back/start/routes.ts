@@ -26,3 +26,8 @@ Route.group(() => {
   Route.post('reg', 'UserController.reg')
   Route.get('/', 'UserController.user').middleware('auth')
 }).prefix('user')
+
+Route.group(() => {
+  Route.get('/', 'NewsController.news')
+  Route.get('/news', 'NewsController.news')
+})

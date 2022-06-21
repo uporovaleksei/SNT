@@ -2,7 +2,7 @@
   <div class="news__card">
       <div class="news__card__label">
           <div class="news__card__title">
-              <h1>{{title}}</h1>
+              <h1>{{newstitle}}</h1>
           </div>
           <div class="news__card__date">
               <p>{{date}}</p>
@@ -32,7 +32,7 @@
         date: String,
         image: String,
         text: String,
-    }
+    },
   }
 </script>
 

@@ -47,6 +47,7 @@ import NewsCard from "@/components/NewsCard"
     },
     data() {
       return {
+        show: true,
         CardNews:[
           {
             title:"Заголовок 1",
@@ -54,7 +55,8 @@ import NewsCard from "@/components/NewsCard"
             image:"22.22.2022",
             text: "lorem",
           }
-        ]
+        ],
+        
       }
     },
   }
