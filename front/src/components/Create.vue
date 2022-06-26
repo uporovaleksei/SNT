@@ -24,7 +24,7 @@
             </div>
             <Tiptap v-model="text"/>
             <div class="accept__btn">
-                <button @click="createNew">Подтвердить</button>
+                <button @click="createNews">Подтвердить</button>
             </div>
         </div>
         </transition>

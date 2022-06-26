@@ -93,16 +93,10 @@ export default {
 
   watch: {
     value(value) {
-      // HTML
       const isSame = this.editor.getHTML() === value
-
-      // JSON
-      // const isSame = JSON.stringify(this.editor.getJSON()) === JSON.stringify(value)
-
       if (isSame) {
         return
       }
-
       this.editor.commands.setContent(value, false)
     },
   },
@@ -114,11 +108,7 @@ export default {
         StarterKit,
       ],
       onUpdate: () => {
-        // HTML
         this.$emit('input', this.editor.getHTML())
-
-        // JSON
-        // this.$emit('input', this.editor.getJSON())
       },
     })
   },
