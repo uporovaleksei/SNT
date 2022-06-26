@@ -5,14 +5,14 @@
               <h1>{{title}}</h1>
           </div>
           <div class="news__card__date">
-              <p>{{date}}</p>
+              <p>{{new Date(date).toLocaleString('ru')}}</p>
           </div>
       </div>
       <div class="news__card__image">
           <img src="../assets/newsimg.jpg" alt="newsimg">
       </div>
       <div class="news__card__text">
-          <p>{{text}}</p>
+          <p v-html="text"></p>
       </div>
       <div class="news__card__comment">
           <div class="comment__icon">
@@ -28,10 +28,10 @@
 <script>
   export default {
     props: {
-        title: String,
-        date: String,
-        image: String,
-        text: String,
+      title: String,
+      date: String,
+      image: String,
+      text: String,
     },
   }
 </script>
