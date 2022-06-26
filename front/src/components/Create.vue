@@ -11,19 +11,20 @@
         <div class="create__card" v-if="show">
             <div class="create__title">
                 <input 
-                type="text"
+                  type="text"
+                  v-model="title"
                 >
             </div>
             <div class="create__image">
                 <label for="input"></label>
                 <input 
-                type="file" 
-                placeholder="Изображение"
+                  type="file" 
+                  placeholder="Изображение"
                 >
             </div>
             <Tiptap v-model="text"/>
             <div class="accept__btn">
-                <button @click="showNews">Подтвердить</button>
+                <button @click="createNew">Подтвердить</button>
             </div>
         </div>
         </transition>
@@ -32,24 +33,32 @@
 </template>
 
 <script>
+import api from "@/api"
 import Tiptap from "@/components/Tiptap.vue"
-  export default {
-    name: "Create",
-    components:{
-      Tiptap
-    },
-    data() {
-      return {
-        show:false,
-        text: null
-      }
-    },
-    methods: {
-      showNews(){
-        console.log(this.text)
-      }
-    },
-  }
+
+export default {
+  name: "Create",
+  components:{
+    Tiptap
+  },
+  data() {
+    return {
+      show:false,
+      title: null,
+      text: null,
+    }
+  },
+  methods: {
+    async createNews(){
+      const date = new Date().getTime()
+      await api.post("news", {
+        date,
+        title: this.title,
+        text: this.text
+      })
+    }
+  },
+}
 </script>
 
 <style>

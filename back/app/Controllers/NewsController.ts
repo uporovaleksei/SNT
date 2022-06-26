@@ -2,16 +2,13 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class NewsController {
-private tb = 'news'
+  private tb = 'news'
 
-public async createNews({ request }: HttpContextContract) {
-  const { title, image, text } = request.body()
-  const news = {
-    title,
-    image,
-    text
+  public async index(){
+    return await Database.from(this.tb).select("*")
   }
-  await Database.table(this.tb).insert(news)
-  return news
-}
+
+  public async create({ request }: HttpContextContract) {
+    await Database.table(this.tb).insert(request.body())
+  }
 }
