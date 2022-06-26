@@ -11,9 +11,7 @@
         <div class="create__card" v-if="show">
             <div class="create__title">
                 <input 
-                type="text" 
-                :placeholder="title"
-                v-model="title"
+                type="text"
                 >
             </div>
             <div class="create__image">
@@ -23,11 +21,9 @@
                 placeholder="Изображение"
                 >
             </div>
-            <Tiptap
-             
-            />
+            <Tiptap v-model="text"/>
             <div class="accept__btn">
-                <button @click="createNews">Подтвердить</button>
+                <button @click="showNews">Подтвердить</button>
             </div>
         </div>
         </transition>
@@ -45,22 +41,12 @@ import Tiptap from "@/components/Tiptap.vue"
     data() {
       return {
         show:false,
-        title: null,
-        image: null,
         text: null
       }
     },
     methods: {
-      async createNews(){
-        const data = await this.$store.dispatch("createNews", {
-          title: this.title,
-          date: this.date,
-          text: this.image
-        })
-      if(data?.error){
-          alert(data.error)
-          return
-        }
+      showNews(){
+        console.log(this.text)
       }
     },
   }
