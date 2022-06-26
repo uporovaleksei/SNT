@@ -27,8 +27,7 @@
                                     14:30 22.04.2022
                                 </div>
                                 <div class="comment__answer">
-                                    <a href="#">Ответить  
-                                    </a>
+                                    <a href="#">Ответить</a>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +51,7 @@ import NewsCard from "@/components/NewsCard"
             title:"Заголовок 1",
             date:"22.22.2022",
             image:"22.22.2022",
-            text: "                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto velit necessitatibus eligendi ipsam minus nesciunt nemo numquam quas totam aspernatur accusantium sit facilis cum aperiam, sunt temporibus natus alias repellat  Atque corrupti odio cumque alias in dolore! Ad, sit ut! Unde explicabo sapiente accusamus autem dolorem officia magni facilis vitae, officiis expedita, non at culpa vel aut dignissimos labore delectus?Provident, nesciunt! Amet alias molestias quasi, eius dicta consequatur harum ipsum in laudantium officia. Animi quas eum nisi nobis mollitia autem, omnis id placeat eligendi a delectus assumenda amet veniam!Neque voluptates sint, nisi quam est dicta distinctio quae cum maiores, magni ut minima sapiente omnis iusto deserunt voluptatem officiis optio expedita harum consequatur repellat quasi. Totam id animi nam.",
+            text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto velit necessitatibus eligendi ipsam minus nesciunt nemo numquam quas totam aspernatur accusantium sit facilis cum aperiam, sunt temporibus natus alias repellat  Atque corrupti odio cumque alias in dolore! Ad, sit ut! Unde explicabo sapiente accusamus autem dolorem officia magni facilis vitae, officiis expedita, non at culpa vel aut dignissimos labore delectus?Provident, nesciunt! Amet alias molestias quasi, eius dicta consequatur harum ipsum in laudantium officia. Animi quas eum nisi nobis mollitia autem, omnis id placeat eligendi a delectus assumenda amet veniam!Neque voluptates sint, nisi quam est dicta distinctio quae cum maiores, magni ut minima sapiente omnis iusto deserunt voluptatem officiis optio expedita harum consequatur repellat quasi. Totam id animi nam.",
           }
         ],
         

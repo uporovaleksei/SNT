@@ -81,7 +81,7 @@
           alert("Пароли не совпадают")
           return
         }
-        const minPassword = 8
+        const minPassword = 1
         if(this.password1?.length < minPassword){
           alert(`Пароль должен содержать минимум ${minPassword} символов`)
           return

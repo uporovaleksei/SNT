@@ -10,15 +10,24 @@
         <transition name="slide-fade">
         <div class="create__card" v-if="show">
             <div class="create__title">
-                <input type="text" :placeholder="title">
+                <input 
+                type="text" 
+                :placeholder="title"
+                v-model="title"
+                >
             </div>
             <div class="create__image">
-                <label for="input">{{label}}</label>
-                <input type="file" placeholder="Изображение">
+                <label for="input"></label>
+                <input 
+                type="file" 
+                placeholder="Изображение"
+                >
             </div>
-            <Tiptap/>
+            <Tiptap
+             
+            />
             <div class="accept__btn">
-                <button>Подтвердить</button>
+                <button @click="createNews">Подтвердить</button>
             </div>
         </div>
         </transition>
@@ -33,13 +42,25 @@ import Tiptap from "@/components/Tiptap.vue"
     components:{
       Tiptap
     },
-    props: {
-      title: String,
-      label: String,
-    },
     data() {
       return {
         show:false,
+        title: null,
+        image: null,
+        text: null
+      }
+    },
+    methods: {
+      async createNews(){
+        const data = await this.$store.dispatch("createNews", {
+          title: this.title,
+          date: this.date,
+          text: this.image
+        })
+      if(data?.error){
+          alert(data.error)
+          return
+        }
       }
     },
   }

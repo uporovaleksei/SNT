@@ -12,7 +12,6 @@ export default class extends BaseSchema {
       table.string('text')
     })
   }
-
   public async down () {
     this.schema.dropTable(this.tableName)
   }
