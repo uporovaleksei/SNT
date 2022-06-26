@@ -1,9 +1,13 @@
-import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class NewsController {
-  private tb = 'news'
-  public async news() {
-    return Database.from(this.tb).first()
-  }
+
+public async index(ctx:HttpContextContract){
+  return Database.from('news').select('*')
+}
+public async createNews(ctx:HttpContextContract){
+  return Database.from('news').select('*')
+}
+
 }

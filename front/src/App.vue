@@ -55,4 +55,8 @@ canvas{
     left: 0;
 }
 
+@media (max-width:425.96px) {
+
+}
+
 </style>

@@ -52,7 +52,7 @@ import MainLayout from '@/layouts/Main.vue'
   font-weight: 600;
 }
 .FAQ__question button{
-  padding: 30px;
+  padding: 10px;
   font-size: 1.5rem;
   background: #476160;
   color: #fff;

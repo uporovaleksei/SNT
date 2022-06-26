@@ -65,4 +65,16 @@ export default {
     text-align: center;
     font-size: 1.5rem;
 }
+@media (max-width:768.96px) {
+  .header{
+    background-size: 500%;
+  }
+  .header__title h1{
+    font-size: 1.5rem;
+  }
+  .header__text p{
+    
+    font-size: 1.3rem;
+  }
+}
 </style>

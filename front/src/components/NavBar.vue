@@ -250,7 +250,32 @@ export default {
 #user__icon {
     transition: 0.2s ease 0s;
 }
-@media (max-width: 767px) {
+@media (max-width:1440.85px) {
+    .navbar__container{
+        width: 99%;
+    }
+}
+@media (min-width: 769px) and (max-width:1024.85px) {
+
+    .navbar__container{
+        flex-direction: column;
+        height: 120px;
+        padding: 10px 0;
+        align-items: center;
+    }
+    .menu__body{
+        display: flex;
+        align-items: center;
+        
+    }
+    .navbar__actions{
+        align-self: center;
+        margin: 0 20px;
+    }
+
+
+}
+@media (max-width: 768.99px) {
     .menu__icon {
         cursor: pointer;
         height: 18px;
@@ -295,7 +320,7 @@ export default {
         width: 100%;
         background: #d3e1e0;
         z-index: 5;
-        margin-top: 80px;
+        margin-top: 60px;
         position: fixed;
         transition: 0.3s ease;
         overflow: auto;

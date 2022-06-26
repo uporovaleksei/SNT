@@ -16,7 +16,7 @@
       </div>
       <div class="news__card__comment">
           <div class="comment__icon">
-            <img src="../assets/message.svg" alt="">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M511.1 63.1v287.1c0 35.25-28.75 63.1-64 63.1h-144l-124.9 93.68c-7.875 5.75-19.12 .0497-19.12-9.7v-83.98h-96c-35.25 0-64-28.75-64-63.1V63.1c0-35.25 28.75-63.1 64-63.1h384C483.2 0 511.1 28.75 511.1 63.1z"/></svg>
           </div>
           <div class="comment__count">
               1
@@ -78,19 +78,38 @@
     gap: 10px;
     width: 100%;
 }
-.comment__icon img{
-    width: 15px;
-    height: 15px;
+.comment__icon svg{
+    width: 20px;
+    fill: #476160;
     transform: translateY(2px);
 }
 .comment__icon {
     padding: 5px 10px;
     background: #d3e1e0;
-    border-radius: 40%;
+    border-radius: 30%;
 }
 .comment__count {
     font-size: 1rem;
     color: #476160;
     font-weight: 600;
+}
+@media (max-width:1024.95px) {
+    .news__card{
+        width: 90vw;
+    }
+
+}
+@media (max-width:425.95px) {
+    .comment__icon {
+    padding: 2px 6px;
+    background: #d3e1e0;
+    border-radius: 30%;
+}
+.comment__icon svg{
+    width: 12px;
+    fill: #476160;
+    transform: translateY(2px);
+}
+
 }
 </style>

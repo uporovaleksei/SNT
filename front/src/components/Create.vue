@@ -1,21 +1,20 @@
 <template>
   <div>
-    <MainLayout>
-    <div class="contacts__create__container">
-        <div class="contacts__create">
+      <div class="create__container">
+        <div class="create">
             <button
             @click="show =!show"
             >
             {{ show ? 'Закрыть' : 'Создать' }}</button>
-    </div>
+        </div>
         <transition name="slide-fade">
         <div class="create__card" v-if="show">
             <div class="create__title">
-                <input type="text" placeholder="Заголовок">
+                <input type="text" :placeholder="title">
             </div>
             <div class="create__image">
-                <label for="input">Изображение для контакта</label>
-                <input type="file">
+                <label for="input">{{label}}</label>
+                <input type="file" placeholder="Изображение">
             </div>
             <Tiptap/>
             <div class="accept__btn">
@@ -24,59 +23,32 @@
         </div>
         </transition>
       </div>
-
-
-      <div class="contacts">
-        <div class="contacts__container">
-          <div class="contacts__title">
-            <h1>Контакты</h1>
-          </div>
-          <div class="contacts__body">
-              
-          </div>
-        </div>
-      </div>
-      <Location/>
-    </MainLayout>
   </div>
 </template>
 
 <script>
-import Location from '@/components/Location.vue'
-import MainLayout from '@/layouts/Main.vue'
+import Tiptap from "@/components/Tiptap.vue"
   export default {
-  name:"Contacts",
-  components:{ 
-    Location,
-    MainLayout
+    name: "Create",
+    components:{
+      Tiptap
     },
-  data() {
-    return {
-      show:false,
-    }
-  },
+    props: {
+      title: String,
+      label: String,
+    },
+    data() {
+      return {
+        show:false,
+      }
+    },
   }
 </script>
 
-<style >
-.contacts {
-  margin: 120px 0;
-}
-.contacts__container {
-  width: 80%;
-  margin: 0 auto;
-}
-.contacts__title h1{
-  font-size: 2rem;
-  color: #476160;
-  font-weight: 600;
-}
-.contacts__body {
-}
-
-.contacts__create__container{
+<style>
+.create__container{
   width: 60%;
-  margin: 160px auto 0 auto;
+  margin: 180px auto 0 auto;
 
   display: flex;
   flex-direction: column;
@@ -89,7 +61,7 @@ import MainLayout from '@/layouts/Main.vue'
   gap: 40px;
   width: 100%;
 }
-.contacts__create button{
+.create button{
   margin: 20px 0;
   padding: 10px 25px;
   background: #476160;
@@ -97,10 +69,10 @@ import MainLayout from '@/layouts/Main.vue'
   border-radius: 50px;
   transition: 0.3s ease;
 }
-.contacts__create button:hover{
+.create button:hover{
  background: #47616086;
 }
-.contacts__create button:active{
+.create button:active{
  transform: scale(0.9);
 }
 .accept__btn button{
@@ -142,7 +114,7 @@ import MainLayout from '@/layouts/Main.vue'
 border: 1px solid #60a5a3;
 }
 .slide-fade-enter-active {
-  transition: all 0.3s;
+  transition: all 0.8s ease;
 }
 .slide-fade-leave-active {
   transition: all .3s;
@@ -155,5 +127,4 @@ border: 1px solid #60a5a3;
 .slide-fade-enter{
   opacity: 0;
 }
-
 </style>

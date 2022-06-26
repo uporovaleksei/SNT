@@ -28,6 +28,7 @@ Route.group(() => {
 }).prefix('user')
 
 Route.group(() => {
-  Route.get('/', 'NewsController.news')
-  Route.get('/news', 'NewsController.news')
+  Route.get('/', 'NewsController.index')
+  Route.get('/news', 'NewsController.index')
+  Route.post('/news', 'NewsController.store')
 })

@@ -47,13 +47,12 @@ import NewsCard from "@/components/NewsCard"
     },
     data() {
       return {
-        show: true,
         CardNews:[
           {
             title:"Заголовок 1",
             date:"22.22.2022",
             image:"22.22.2022",
-            text: "lorem",
+            text: "                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto velit necessitatibus eligendi ipsam minus nesciunt nemo numquam quas totam aspernatur accusantium sit facilis cum aperiam, sunt temporibus natus alias repellat  Atque corrupti odio cumque alias in dolore! Ad, sit ut! Unde explicabo sapiente accusamus autem dolorem officia magni facilis vitae, officiis expedita, non at culpa vel aut dignissimos labore delectus?Provident, nesciunt! Amet alias molestias quasi, eius dicta consequatur harum ipsum in laudantium officia. Animi quas eum nisi nobis mollitia autem, omnis id placeat eligendi a delectus assumenda amet veniam!Neque voluptates sint, nisi quam est dicta distinctio quae cum maiores, magni ut minima sapiente omnis iusto deserunt voluptatem officiis optio expedita harum consequatur repellat quasi. Totam id animi nam.",
           }
         ],
         
@@ -86,6 +85,9 @@ import NewsCard from "@/components/NewsCard"
     padding: 40px;
     border: 2px solid #4761605b;
     border-top: 0;
+}
+.news__card__image img {
+    width: 100%;
 }
 .user {
     display: flex;
@@ -123,4 +125,12 @@ gap: 40px;
 .comment__answer a:hover{
     color: #476160a8;
 }
+
+@media (max-width:1024.95px) {
+    .news__commentary{
+        width: 90vw;
+    }
+
+}
+
 </style>

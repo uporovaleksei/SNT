@@ -106,4 +106,10 @@
     border-bottom: 1px solid rgba(107, 107, 107, 0.342);
     padding-bottom: 20px;
 }
+@media (max-width:425.96px) {
+    .user__avatar {
+        width: 30px;
+        height: 30px;
+}
+}
 </style>
