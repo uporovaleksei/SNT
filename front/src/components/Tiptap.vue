@@ -78,9 +78,24 @@ export default {
     EditorContent,
   },
 
+  props: {
+    text: String
+  },
+
   data() {
     return {
       editor: null,
+    }
+  },
+
+  computed: {
+    content: {
+      get(){
+        return this.text
+      },
+      set(v){
+        this.$emit('textUp', v)
+      }
     }
   },
 
@@ -89,7 +104,7 @@ export default {
       extensions: [
         StarterKit,
       ],
-      content: `Текст новости`,
+      content: this.content,
     })
   },
 

@@ -16,7 +16,7 @@
                 <label for="input">{{label}}</label>
                 <input type="file" placeholder="Изображение">
             </div>
-            <Tiptap/>
+            <Tiptap :text="text" @textUp="v => text = v"/>
             <div class="accept__btn">
                 <button>Подтвердить</button>
             </div>
@@ -40,6 +40,7 @@ import Tiptap from "@/components/Tiptap.vue"
     data() {
       return {
         show:false,
+        text: null
       }
     },
   }
