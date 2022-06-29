@@ -28,6 +28,11 @@ Route.group(() => {
 }).prefix('user')
 
 Route.group(() => {
-  Route.get('/', 'NewsController.index')
+  Route.get('/:limit?', 'NewsController.index')
   Route.post('/', 'NewsController.create')
 }).prefix('news')
+
+Route.group(() => {
+  Route.get('/:id', 'CommentsController.index')
+  Route.post('/:id', 'CommentsController.create')
+}).prefix('comments')

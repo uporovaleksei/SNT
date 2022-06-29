@@ -7,33 +7,17 @@
                 <NewsCard 
                   v-for="item in news" 
                   :key="item.id" 
+                  :id="item.id"
                   :title="item.title"
                   :date="item.date"
                   :image="item.image"
                   :text="item.text"
                 />
-                <!-- <div class="news__commentary">
-                    <div class="user">
-                        <div class="user__avatar">
-                        </div>
-                        <div class="user__data">
-                            <div class="user__name">
-                                Пользователь_1
-                            </div>
-                            <div class="user__comment">
-                                <p>Lorem ipsum dolor sit amet.</p>
-                            </div>
-                            <div class="comment__actions">
-                                <div class="comment__date">
-                                    14:30 22.04.2022
-                                </div>
-                                <div class="comment__answer">
-                                    <a href="#">Ответить</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+                <div v-if="limit3" class="all__news">
+                    <router-link to="news">
+                        Все новости
+                    </router-link>
+                </div>
             </div>
         </div>
 </template>
@@ -47,6 +31,12 @@ export default {
   components:{
       NewsCard,
   },
+  props: {
+    limit3: {
+        type: Boolean,
+        default: false
+    }
+  },
   data() {
     return {
       news: []
@@ -57,13 +47,25 @@ export default {
   },
   methods: {
     async getNews(){
-      this.news = await api.get("news")
+      this.news = await api.get(this.limit3 ? "news/3" : "news")
     }
   }
 }
 </script>
 
 <style>
+.all__news {
+  align-self: center;
+}
+.all__news a{
+  color: #476160;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+.all__news a:hover{
+  color: #47616096;
+}
 .news{
     margin: 120px 0;
 }
@@ -71,6 +73,7 @@ export default {
     width: 80%;
     margin: 0 auto;
     display: flex;
+    gap: 20px;
     flex-direction: column;
 }
 .news__title{
@@ -91,47 +94,39 @@ export default {
 .news__card__image img {
     width: 100%;
 }
-.user {
-    display: flex;
-    gap: 20px   ;
-}
-.user__avatar {
-    width: 70px;
-    height: 70px;
-    background: #476160;
-    border-radius: 100%;
-}
-.user__data {
-display: flex;
-flex-direction: column;
-gap: 10px;
-}
-.user__name {
-    font-size: 1.1rem;
-    color: #476160;
-    font-weight: 600;
-}
-.user__comment {
-}
-.comment__actions {
-display: flex;
-gap: 40px;
-}
-.comment__date {
-    color: rgb(94, 94, 94);
-}
-.comment__answer a{
-    color: #476160;
-    transition: 0.3s ease;
-}
-.comment__answer a:hover{
-    color: #476160a8;
-}
+
 
 @media (max-width:1024.95px) {
     .news__commentary{
         width: 90vw;
     }
+
+}
+@media (max-width:425.95px) {
+
+.news {
+    margin: 20px 0;
+}
+.news__title {
+    margin-bottom: 20px;
+}
+.news__card{
+    padding: 10px;
+}
+.comment__icon {
+    padding: 4px 8px;
+    background: #d3e1e0;
+    border-radius: 30%;
+}
+.comment__icon svg{
+    width: 16px;
+    fill: #476160;
+    transform: translateY(2px);
+}
+
+.user__avatar{
+    display: none;
+}
 
 }
 

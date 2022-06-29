@@ -7,9 +7,6 @@
             <div class="FAQ__title">
               <h1>Вопрос/Ответ</h1>
             </div>
-            <div class="FAQ__question">
-              <button>Задать вопрос</button>
-            </div>
           </div>
           <div class="FAQ__body">
 

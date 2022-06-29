@@ -18,7 +18,7 @@ export default class UserController {
     const hash = this.hash(login, password)
     const user = await Database.from(this.tb).where('hash', hash).first()
     if (!user) return { error: 'Неверные данные' }
-    session.put('user', user)
+    session.put('user', await Database.from(this.tb).where('login', login).first())
     return user
   }
 
@@ -39,7 +39,7 @@ export default class UserController {
       is_admin: false,
     }
     await Database.table(this.tb).insert(user)
-    session.put('user', user)
+    session.put('user', await Database.from(this.tb).where('login', login).first())
     return user
   }
 }

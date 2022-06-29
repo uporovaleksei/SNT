@@ -1,12 +1,7 @@
 <template>
   <div>
     <MainLayout>
-      <Create
-      v-for="item in CreateFields"
-      :key="item"
-      v-bind:title="item.title"
-      v-bind:label="item.label"
-      />
+      <Create v-if="isAdmin"/>
       <News/>
       <Footer/>
     </MainLayout>
@@ -15,7 +10,7 @@
 
 <script>
 import MainLayout from "@/layouts/Main.vue"
-import News from "@/components/NewsItem.vue"
+import News from "@/components/NewsItems.vue"
 import Create from '@/components/Create.vue'
 
 
@@ -28,14 +23,13 @@ export default {
   data() {
     return {
       show: false,
-      CreateFields:[
-        {
-          title:"Заголовок новости",
-          label: "Загрузить изображение для новости"
-        },
-      ]
     }
   },
+  computed: {
+    isAdmin(){
+      return this.$store.state.user?.is_admin
+    }
+  }
 }
 </script>
 

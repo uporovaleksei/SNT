@@ -16,11 +16,17 @@
                 >
             </div>
             <div class="create__image">
-                <label for="input"></label>
                 <input 
                   type="file" 
+                  id="file" 
+                  ref="file"
+                  multiple = "true"
                   placeholder="Изображение"
+                  @change = "handleFileUpload"
                 >
+                <div class="preview">
+                  <img alt="" :src ="preview">
+                </div>
             </div>
             <Tiptap v-model="text"/>
             <div class="accept__btn">
@@ -46,6 +52,8 @@ export default {
       show:false,
       title: null,
       text: null,
+      file: null,
+      preview: null,
     }
   },
   methods: {
@@ -54,14 +62,35 @@ export default {
       await api.post("news", {
         date,
         title: this.title,
-        text: this.text
+        text: this.text,
+        image: this.preview
       })
+      window.location.reload()
+    },
+    handleFileUpload(event){
+      const files = Array.from(event.target.files)
+      files.forEach(file => {
+        const reader = new FileReader()
+        reader.onload = ev =>{
+          const src = ev.target.result
+          console.log(src)
+          this.preview = src
+        }
+        reader.readAsDataURL(file)
+      })
+
     }
   },
 }
 </script>
 
 <style>
+
+.preview img{
+  width: 100px;
+  background: #47616048;
+}
+
 .create__container{
   width: 60%;
   margin: 180px auto 0 auto;
@@ -107,14 +136,13 @@ export default {
 .accept__btn button:active{
  transform: translateY(-5px);
 }
-.accept__btn{}
 .create__image{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
 }
 .create__title {
   width: 100%;

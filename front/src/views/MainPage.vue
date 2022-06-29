@@ -13,9 +13,11 @@
           </div>
         </div>
       </div>
-      <News/>
+      <News :limit3="true"/>
       <SliderBar/>
-      <Comments/>
+      <div class="comment__review">
+        <Comments/>
+      </div>
       <Location/>
     </MainLayout>
   </div>
@@ -23,7 +25,7 @@
 
 <script>
 import MainLayout from "@/layouts/Main"
-import News from "@/components/NewsItem.vue"
+import News from "@/components/NewsItems.vue"
 import SliderBar from "@/components/SliderBar.vue"
 import Comments from "@/components/Comments.vue"
 import Location from "@/components/Location.vue"
@@ -40,6 +42,12 @@ export default {
 
 
 <style>
+
+.comment__review{
+  width: 80%;
+  margin: 0 auto;
+}
+
 .header{
     background:linear-gradient(#293636bd,#293636bd), url('../assets/back.jpg') no-repeat;
     background-size: 100% 100%;
@@ -69,6 +77,9 @@ export default {
   .header{
     background-size: 500%;
   }
+  .header__container{
+    width: 80%;
+  }
   .header__title h1{
     font-size: 1.5rem;
   }
@@ -77,4 +88,5 @@ export default {
     font-size: 1.3rem;
   }
 }
+
 </style>
