@@ -10,22 +10,25 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M447.1 256C447.1 273.7 433.7 288 416 288H109.3l105.4 105.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448s-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L109.3 224H416C433.7 224 447.1 238.3 447.1 256z"/></svg>
                     </div>
                     <transition name="fade" mode="out-in">
-                    <template v-for="(slide,index) in Slider">
+                    <template 
+                    v-for="(item,index) in items">
                         <div class="slider__cards" 
                         v-if="index == active"
-                        :key="index">
+                        :key="index"
+                        >
                             <div class="slider__card">
                                 <div class="slider__card__image">
+                                    <img :src="item.image" alt="">
                                 </div>
                                 <div class="slider__card__name">
-                                    {{slide.name}}
+                                    {{item.name}}
                                 </div>
                                 <div class="slider__card__status">
-                                    Глава правления
+                                    {{item.status}}
                                 </div>
                                 <div class="slider__card__button">
                                     <router-link to="/government">
-                                        <button>Подробнее</button>
+                                        <button v-if="limit3">Подробнее</button>
                                     </router-link>
                                 </div>
                             </div>
@@ -40,7 +43,7 @@
                 </div>
                 <ul class="dots" :key="index">
                     <li 
-                    v-for="(dot, index) in Slider"
+                    v-for="(dot, index) in items"
                     :key="index"
                     :class="{ active: index === active }"
                     @click="jump(index)"
@@ -52,42 +55,50 @@
 </template>
 
 <script>
+import api from "@/api"
   export default {
     data() {
         return {
             active: 0,
-            Slider:[
-                {
-                    image:null,
-                    name:"Иванов Иван Иванович1",
-                    status:"Глава правления",
-                },
-                {
-                    image:null,
-                    name:"Иванов Иван Иванович2",
-                    status:"Глава правления",
-                },
-                {
-                    image:null,
-                    name:"Иванов Иван Иванович3",
-                    status:"Глава правления",
-                },
+            name:null,
+            status:null,
+            image:null,
+            preview:null,
+            index: null,
+            items:[
             ]
         }
+    },
+    props: {
+    limit3: {
+        type: Boolean,
+        default: true
+    }
+  },
+    mounted() {
+        this.getGovernment(),
+        this.move
     },
     methods: {
         move(amount){
         let newIndex = this.active + amount
-        if (newIndex == this.Slider.length) {
+        if (newIndex == this.items.length) {
             newIndex = 0
         }
-        if (newIndex < 0) newIndex = this.Slider.length-1
+        if (newIndex < 0) newIndex = this.items.length-1
         this.active = newIndex
         },
         jump(index) {
         this.active = index
     },
+    created() {
+        this.getGovernment()
     },
+    async getGovernment(){
+      this.items = await api.get(this.limit3?"government/3":"government")
+    },
+    },
+
   }
 </script>
 
@@ -152,10 +163,11 @@
     transition: 0.3s ease;
 }
 
-.slider__card__image {
+.slider__card__image img{
     width: 100%;
     height: 300px;
     background: #476160;
+    border: #476160 solid 1px;
 }
 .slider__card__name {
     text-align: center;

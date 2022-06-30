@@ -1,5 +1,8 @@
 <template>
   <div class="news__card">
+    <div class="delete__btn">
+        <button @click="del">X</button>
+    </div>
       <div class="news__card__label">
           <div class="news__card__title">
               <h1>{{title}}</h1>
@@ -12,7 +15,9 @@
        <img  alt="" :src="image"> 
       </div>
       <div class="news__card__text">
-          <p v-html="text"></p>
+          <div v-html="text">
+
+          </div>
       </div>
       <div class="news__card__comment">
           <div class="comment__icon">
@@ -28,6 +33,8 @@
 
 <script>
 import Comments from "./Comments.vue"
+import api from "@/api"
+
 
 export default {
     components: {
@@ -53,6 +60,16 @@ export default {
             return format.toLocaleDateString('ru-RU')
             }
         },
+        async del(){
+            let accept = confirm("Удалить элемент?");
+            if(accept){
+               await api.delete("news/"+this.id)
+               window.location.reload()
+            }
+            else{
+                return
+            }
+        }
     },
 }
 </script>
@@ -94,6 +111,9 @@ export default {
 }
 .news__card__text {
     margin: 20px 0;
+}
+.news__card__text strong{
+    font-size: 1.3rem;
 }
 .news__card__text p{
     margin: 20px 0;

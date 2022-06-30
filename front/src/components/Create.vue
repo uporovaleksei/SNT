@@ -18,9 +18,7 @@
             <div class="create__image">
                 <input 
                   type="file" 
-                  id="file" 
-                  ref="file"
-                  multiple = "true"
+                  multiple = "false"
                   placeholder="Изображение"
                   @change = "handleFileUpload"
                 >

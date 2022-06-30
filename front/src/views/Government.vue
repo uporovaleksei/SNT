@@ -1,7 +1,9 @@
 <template>
   <div>
     <MainLayout>
-        <div class="government__create__container">
+        <div class="government__create__container"
+          v-if="isAdmin"
+        >
         <div class="government__create">
             <button
             @click="show =!show"
@@ -11,19 +13,40 @@
         <transition name="slide-fade">
         <div class="create__card" v-if="show">
             <div class="create__title">
-                <input type="text" placeholder="Фамилия">
-                <input type="text" placeholder="Имя">
-                <input type="text" placeholder="Отчество">
+                <input 
+                type="text" 
+                placeholder="ФИО"
+                v-model="name"
+                >
+                <input 
+                type="text" 
+                placeholder="Должность"
+                v-model="status"
+                >
             </div>
             <div class="create__image">
               <label for="input">Контактная информация</label>
-              <input type="text" placeholder="Email">
-              <input type="text" placeholder="Phone">
-              <input type="file" placeholder="Изображение">
+              <input 
+              type="text" 
+              placeholder="Email"
+              v-model="email"
+              >
+              <input 
+              type="text" 
+              placeholder="Телефон"
+              v-model="phone"
+              >
+              <input type="file" 
+                  multiple = "false"
+                  placeholder="Изображение"
+                  @change = "handleFileUpload"
+                >
+                <div class="preview">
+                  <img alt="" :src ="preview">
+                </div>
             </div>
-            <Tiptap/>
             <div class="accept__btn">
-                <button>Добавить</button>
+                <button @click="createGovernment">Добавить</button>
             </div>
         </div>
         </transition>
@@ -34,6 +57,41 @@
             <h1>Состав правления</h1>
           </div>
           <div class="government__body">
+            <div 
+            class="government__item"
+            v-for="item in items"
+            :key="item.id"
+            >
+              <div class="government__photo">
+                <img :src="item.image" alt="">
+              </div>
+              <div class="government__info">
+                <div class="government__name">
+                  <label for="h2">
+                    ФИО:
+                  </label>
+                  <h2>{{item.name}}</h2>
+                </div>
+                <div class="government__status">
+                  <label for="h2">
+                    Должность:
+                  </label>
+                  <h2>{{item.status}}</h2>
+                </div>
+                <div class="government___phone">
+                   <label for="h2">
+                    Телефон:
+                  </label>
+                  <h2>{{item.phone}}</h2>
+                </div>
+                <div class="government__email">
+                   <label for="h2">
+                    Email:
+                  </label>
+                  <h2>{{item.email}}</h2>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -43,7 +101,7 @@
 
 <script>
 import MainLayout from "@/layouts/Main.vue";
-
+import api from "@/api"
   export default {
     name: "Government",
     components:{
@@ -52,7 +110,51 @@ import MainLayout from "@/layouts/Main.vue";
     data() {
       return {
         show:false,
+        name:null,
+        status:null,
+        phone:null,
+        email:null,
+        image:null,
+        preview: null,
+        items:[],
       }
+    },
+  computed: {
+    isAdmin(){
+      return this.$store.state.user?.is_admin
+    }
+  },
+  created(){
+    this.getGovernment()
+  },
+    methods: {
+      async createGovernment(){
+      console.log(this.file)
+      await api.post("government", {
+        name:this.name,
+        status:this.status,
+        phone:this.phone,
+        email: this.email,
+        image: this.preview
+      },
+      )
+    window.location.reload()
+    },
+    handleFileUpload(event){
+      const files = Array.from(event.target.files)
+      files.forEach(file => {
+        const reader = new FileReader()
+        reader.onload = ev =>{
+          const src = ev.target.result
+          console.log(src)
+          this.preview = src
+        }
+        reader.readAsDataURL(file)
+      })
+    },
+    async getGovernment(){
+      this.items = await api.get('/government')
+    },
     },
   }
 </script>
@@ -70,7 +172,50 @@ import MainLayout from "@/layouts/Main.vue";
   font-weight: 600;
 }
 .government__body {
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
+
+.government__item {
+  display: flex;
+  gap: 20px;
+}
+.government__item h2{
+  font-size: 1.2rem;
+  color: #476160;
+}
+.government__photo{
+  width: 300px;
+  height: 100%;
+  background: #476160;
+}
+.government__photo img{
+  width: 300px;
+  height: 100%;
+  border: #476160 2px solid;
+}
+.government__photo,.government__name, .government__status, .government___phone, .government__email{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.government__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 20px;
+}
+.government__name {
+}
+.government__status {
+}
+.government___phone {
+}
+.government__email {
+}
+
 .government__create__container{
   width: 60%;
   margin: 160px auto 0 auto;
@@ -116,7 +261,6 @@ import MainLayout from "@/layouts/Main.vue";
 .accept__btn button:active{
  transform: translateY(-5px);
 }
-.accept__btn{}
 .create__image{
   width: 100%;
   display: flex;

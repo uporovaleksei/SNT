@@ -91,7 +91,7 @@ export default {
                     },
                      {
                         name:"Контакты",
-                        route: "/сontacts"
+                        route: "/contacts"
                     },
                     ],
                 menuIsOpen: false

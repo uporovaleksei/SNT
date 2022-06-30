@@ -1,7 +1,9 @@
 <template>
 <div>
 <MainLayout>
-        <div class="documents__create__container">
+        <div class="documents__create__container"
+          v-if="isAdmin"
+        >
         <div class="documents__create">
             <button
             @click="show =!show"
@@ -11,15 +13,24 @@
         <transition name="slide-fade">
         <div class="create__card" v-if="show">
             <div class="create__title">
-                <input type="text" placeholder="Заголовок">
+                <input 
+                  type="text" 
+                  placeholder="Заголовок"
+                  v-model="title"
+                >
             </div>
             <div class="create__image">
               <label for="input">Загрузить документ</label>
-              <input type="file" placeholder="Изображение">
+              <input 
+                type="file"
+                id="file" 
+                ref="file"
+                placeholder="Документ"
+                @change ="handleFileUpload"
+              >
             </div>
-            <Tiptap/>
             <div class="accept__btn">
-                <button>Добавить</button>
+                <button @click="createDocs()">Добавить</button>
             </div>
         </div>
         </transition>
@@ -29,8 +40,28 @@
     <div class="docuuments__title">
         <h1>Документы</h1>
     </div>
-    <div class="documents__body">
+    <div 
+    class="documents__body">
+      <div class="document__item"
+          v-for="item in items"
+          :key="item.id"
+          >
+        <div class="document__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 64C0 28.65 28.65 0 64 0H229.5C246.5 0 262.7 6.743 274.7 18.75L365.3 109.3C377.3 121.3 384 137.5 384 154.5V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM336 448V160H256C238.3 160 224 145.7 224 128V48H64C55.16 48 48 55.16 48 64V448C48 456.8 55.16 464 64 464H320C328.8 464 336 456.8 336 448z"/></svg>
+        </div>
+        <div class="document__info">
+        <div class="document__title">
+          <h1>{{item.title}}</h1>
+        </div>
 
+        <div class="document__url">
+          <a 
+            :href="item.document"  
+            :download="item.name"
+          >{{item.name}}</a>
+        </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -39,6 +70,7 @@
 </template>
 
 <script>
+import api from "@/api"
 import MainLayout from "@/layouts/Main.vue"
 
   export default {
@@ -48,12 +80,59 @@ import MainLayout from "@/layouts/Main.vue"
   data() {
     return {
       show: false,
+      file: null,
+      title: null,
+      document: null,
+      name:null,
+      items:[]
     }
+  },
+    created(){
+    this.getDocs()
+  },
+    computed: {
+    isAdmin(){
+      return this.$store.state.user?.is_admin
+    }
+  },
+  methods: {
+    handleFileUpload(event){
+      const files = Array.from(event.target.files)
+      files.forEach(file => {
+        const reader = new FileReader()
+        this.name = file.name
+        console.log(this.name)
+        reader.onload = ev =>{
+          const src = ev.target.result
+          this.file = src
+        }
+        reader.readAsDataURL(file)
+      })
+
+    },
+    async createDocs(){
+      console.log(this.file)
+      await api.post("documents", {
+        name:this.name,
+        title: this.title,
+        document: this.file
+      },
+      )
+     window.location.reload()
+    },
+    async getDocs(){
+      this.items = await api.get('/documents')
+    },
   },
   }
 </script>
 
 <style>
+.document__icon svg{
+  width: 30px;
+  fill: #476160;
+
+}
 .documents {
   margin: 120px 0;
 }
@@ -67,6 +146,21 @@ import MainLayout from "@/layouts/Main.vue"
   font-weight: 600;
 }
 .documents__body {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0;
+  gap: 20px;
+}
+.document__item {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.create__image input{
+  width: 50%;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #476160;
 }
 .documents__create__container{
   width: 60%;
@@ -113,13 +207,12 @@ import MainLayout from "@/layouts/Main.vue"
 .accept__btn button:active{
  transform: translateY(-5px);
 }
-.accept__btn{}
 .create__image{
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   gap: 20px;
 }
 .create__title {
@@ -142,7 +235,7 @@ border: 1px solid #60a5a3;
   transition: all .3s;
 }
 .slide-fade-leave-to
-/* .slide-fade-leave-active до версии 2.1.8 */ {
+ {
  opacity: 0;
 
 }

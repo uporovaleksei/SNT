@@ -9,7 +9,25 @@
             </div>
           </div>
           <div class="FAQ__body">
-
+              <div class="FAQ__question">
+                <h1>Как можно попасть на территорию?</h1>
+              </div>
+              <div class="FAQ__answer">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium suscipit possimus itaque ducimus omnis pariatur corrupti! Vitae inventore, voluptatem in nemo magnam fugit, dicta asperiores fuga nam praesentium voluptatum ad.</p>
+              </div>
+              <div class="FAQ__question">
+                <h1>Какие часы работы?</h1>
+              </div>
+              <div class="FAQ__answer">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium suscipit possimus itaque ducimus omnis pariatur corrupti! Vitae inventore, voluptatem in nemo magnam fugit, dicta asperiores fuga nam praesentium voluptatum ad.</p>
+              </div>
+              <div class="FAQ__question">
+                <h1>Где вы находитесь?</h1>
+              </div>
+              <div class="FAQ__answer">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium suscipit possimus itaque ducimus omnis pariatur corrupti! Vitae inventore, voluptatem in nemo magnam fugit, dicta asperiores fuga nam praesentium voluptatum ad.</p>
+                <img src="../assets/map.jpg" alt="" @click="open">
+              </div>
           </div>
         </div>
       </div>
@@ -25,7 +43,13 @@ import MainLayout from '@/layouts/Main.vue'
     name: "FAQ",
     components:{
       MainLayout,
-    }
+    },
+    methods: {
+      open(){
+        var newTab = window.open();
+        newTab.location.href = 'http://www.sntzapad.ru/files/image/doc/map-rosreestr.jpg  ';
+      }
+    },
     
   }
 </script>
@@ -48,21 +72,26 @@ import MainLayout from '@/layouts/Main.vue'
   color: #476160;
   font-weight: 600;
 }
-.FAQ__question button{
-  padding: 10px;
-  font-size: 1.5rem;
-  background: #476160;
-  color: #fff;
-  font-weight: 500;
-  border: 0;
-  transition: 0.3s ease;
-}
-.FAQ__question button:hover{
-  background: #476160a8;
-}
-.FAQ__question button:active{
-  transform: scale(0.9);
-}
 .FAQ__body {
+  width: 80%;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.FAQ__question h1{
+  font-size: 1.5rem;
+  color: #476160;
+}
+.FAQ__answer{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.FAQ__answer img{
+  cursor: pointer;
+}
+.FAQ__answer img{
+  border: #476160 solid 2px;
 }
 </style>

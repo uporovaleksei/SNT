@@ -38,7 +38,7 @@ const routes = [
     component: Government
   },
   {
-    path: '/сontacts',
+    path: '/contacts',
     name: 'Contacts',
     component: Contacts
   },

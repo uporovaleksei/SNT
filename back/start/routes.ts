@@ -30,9 +30,22 @@ Route.group(() => {
 Route.group(() => {
   Route.get('/:limit?', 'NewsController.index')
   Route.post('/', 'NewsController.create')
+  Route.delete('/:id', 'NewsController.delete')
 }).prefix('news')
 
 Route.group(() => {
   Route.get('/:id', 'CommentsController.index')
   Route.post('/:id', 'CommentsController.create')
 }).prefix('comments')
+Route.group(() => {
+  Route.get('/', 'DocsController.index')
+  Route.post('/', 'DocsController.create')
+}).prefix('documents')
+Route.group(() => {
+  Route.get('/:limit?', 'GovernmentController.index')
+  Route.post('/', 'GovernmentController.create')
+}).prefix('government')
+Route.group(() => {
+  Route.get('/', 'ContactsController.index')
+  Route.post('/', 'ContactsController.create')
+}).prefix('contacts')
