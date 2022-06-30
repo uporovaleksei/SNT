@@ -63,7 +63,7 @@ export default {
         text: this.text,
         image: this.preview
       })
-      window.location.reload()
+      this.$router.go(0);
     },
     handleFileUpload(event){
       const files = Array.from(event.target.files)

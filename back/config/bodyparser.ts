@@ -154,7 +154,7 @@ const bodyParserConfig: BodyParserConfig = {
     | Request body encoding
     |
     */
-    encoding: 'utf-8',
+    encoding: 'Utf-8',
 
     /*
     |--------------------------------------------------------------------------

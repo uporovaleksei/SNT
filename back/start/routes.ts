@@ -31,6 +31,7 @@ Route.group(() => {
   Route.get('/:limit?', 'NewsController.index')
   Route.post('/', 'NewsController.create')
   Route.delete('/:id', 'NewsController.delete')
+  Route.put('/:id', 'NewsController.update')
 }).prefix('news')
 
 Route.group(() => {
@@ -40,12 +41,18 @@ Route.group(() => {
 Route.group(() => {
   Route.get('/', 'DocsController.index')
   Route.post('/', 'DocsController.create')
+  Route.delete('/:id', 'DocsController.delete')
 }).prefix('documents')
 Route.group(() => {
   Route.get('/:limit?', 'GovernmentController.index')
   Route.post('/', 'GovernmentController.create')
+  Route.delete ('/:id', 'GovernmentController.delete')
 }).prefix('government')
 Route.group(() => {
   Route.get('/', 'ContactsController.index')
   Route.post('/', 'ContactsController.create')
+  Route.delete ('/:id', 'ContactsController.delete')
 }).prefix('contacts')
+Route.group(() => {
+  Route.put('/', 'ProfileController.update')
+}).prefix('profile')

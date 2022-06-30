@@ -12,4 +12,8 @@ export default class NewsController {
   public async create({ request }: HttpContextContract) {
     await Database.table(this.tb).insert(request.body())
   }
+  public async delete({params}: HttpContextContract){
+    let query = `DELETE FROM ${this.tb} WHERE id=${params.id}`
+    return (await Database.rawQuery(query)).rows
+  }
 }

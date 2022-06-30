@@ -33,7 +33,9 @@
                         <span class="actions__username" 
                         v-if="username"
                         >
-                        {{username}}
+                        <router-link :to="'/profile'">
+                            {{username}}
+                        </router-link>
                         </span>
                         <router-link 
                             v-else

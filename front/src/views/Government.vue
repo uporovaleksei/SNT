@@ -62,6 +62,11 @@
             v-for="item in items"
             :key="item.id"
             >
+            <DeleteBtn
+            v-if="isAdmin" 
+            :id="item.id" 
+            :name="tbname"
+            />
               <div class="government__photo">
                 <img :src="item.image" alt="">
               </div>
@@ -101,15 +106,19 @@
 
 <script>
 import MainLayout from "@/layouts/Main.vue";
+import DeleteBtn from "@/components/DeleteBtn.vue"
+
 import api from "@/api"
   export default {
     name: "Government",
     components:{
-      MainLayout
+      MainLayout,
+      DeleteBtn
     },
     data() {
       return {
         show:false,
+        tbname:"government",
         name:null,
         status:null,
         phone:null,
@@ -138,7 +147,7 @@ import api from "@/api"
         image: this.preview
       },
       )
-    window.location.reload()
+    this.$router.go(0);
     },
     handleFileUpload(event){
       const files = Array.from(event.target.files)
@@ -155,6 +164,17 @@ import api from "@/api"
     async getGovernment(){
       this.items = await api.get('/government')
     },
+    async del(id){
+    let accept = confirm("Удалить элемент?");
+    if(accept){
+        await api.delete("documents/"+ id)
+        console.log(id)
+        this.$router.go(0);
+    }
+    else{
+        return
+    }
+    }
     },
   }
 </script>

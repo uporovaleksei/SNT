@@ -53,6 +53,11 @@
               v-for="item in contacts"
               :key="item.title"
               >
+              <DeleteBtn
+                v-if="isAdmin" 
+                :id="item.id" 
+                :name="tbname"  
+              />
                 <div class="contact__image">
                   <img :src="item.image" alt="">
                 </div>
@@ -76,16 +81,19 @@
 <script>
 import Location from '@/components/Location.vue'
 import MainLayout from '@/layouts/Main.vue'
+import DeleteBtn from '@/components/DeleteBtn.vue'
 import api from '@/api'
   export default {
   name:"Contacts",
   components:{ 
     Location,
-    MainLayout
+    MainLayout,
+    DeleteBtn
     },
   data() {
     return {
       show:false,
+      tbname:"contacts",
       title:null,
       text:null,
       image: null,
@@ -112,7 +120,7 @@ import api from '@/api'
         text:this.text,
         image:this.preview,
       })
-      window.location.reload()
+      this.$router.go(0);
     },
         handleFileUpload(event){
       const files = Array.from(event.target.files)

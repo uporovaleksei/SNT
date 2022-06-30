@@ -1,11 +1,21 @@
 <template>
   <div class="news__card">
-    <div class="delete__btn">
-        <button @click="del">X</button>
-    </div>
+    <button class="changeBtn" @click="showChange =! showChange">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M490.3 40.4C512.2 62.27 512.2 97.73 490.3 119.6L460.3 149.7L362.3 51.72L392.4 21.66C414.3-.2135 449.7-.2135 471.6 21.66L490.3 40.4zM172.4 241.7L339.7 74.34L437.7 172.3L270.3 339.6C264.2 345.8 256.7 350.4 248.4 353.2L159.6 382.8C150.1 385.6 141.5 383.4 135 376.1C128.6 370.5 126.4 361 129.2 352.4L158.8 263.6C161.6 255.3 166.2 247.8 172.4 241.7V241.7zM192 63.1C209.7 63.1 224 78.33 224 95.1C224 113.7 209.7 127.1 192 127.1H96C78.33 127.1 64 142.3 64 159.1V416C64 433.7 78.33 448 96 448H352C369.7 448 384 433.7 384 416V319.1C384 302.3 398.3 287.1 416 287.1C433.7 287.1 448 302.3 448 319.1V416C448 469 405 512 352 512H96C42.98 512 0 469 0 416V159.1C0 106.1 42.98 63.1 96 63.1H192z"/></svg>
+    </button>
+    <DeleteBtn
+        v-if="isAdmin" 
+        :id="id" 
+        :name="tbname"
+    />
       <div class="news__card__label">
           <div class="news__card__title">
               <h1>{{title}}</h1>
+              <input type="text"
+              v-if="showChange"
+              v-model="changeTitle"
+              >
+              <button @click="updateNews">send</button>
           </div>
           <div class="news__card__date">
               <p>{{formatDate(date)}}</p>
@@ -20,6 +30,7 @@
           </div>
       </div>
       <div class="news__card__comment">
+        
           <div class="comment__icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M511.1 63.1v287.1c0 35.25-28.75 63.1-64 63.1h-144l-124.9 93.68c-7.875 5.75-19.12 .0497-19.12-9.7v-83.98h-96c-35.25 0-64-28.75-64-63.1V63.1c0-35.25 28.75-63.1 64-63.1h384C483.2 0 511.1 28.75 511.1 63.1z"/></svg>
           </div>
@@ -33,12 +44,13 @@
 
 <script>
 import Comments from "./Comments.vue"
-import api from "@/api"
-
+import DeleteBtn from "./DeleteBtn.vue"
+import api from '@/api'
 
 export default {
     components: {
-        Comments
+        Comments,
+        DeleteBtn
     },
     props: {
         id: Number,
@@ -49,8 +61,16 @@ export default {
     },
     data() {
         return {
-            commentsCount: null
+            commentsCount: null,
+            tbname:'news',
+            showChange:false,
+            changeTitle:null,
         }
+    },
+    computed: {
+    isAdmin(){
+      return this.$store.state.user?.is_admin
+    }
     },
     methods: {
         formatDate(value){
@@ -60,21 +80,20 @@ export default {
             return format.toLocaleDateString('ru-RU')
             }
         },
-        async del(){
-            let accept = confirm("Удалить элемент?");
-            if(accept){
-               await api.delete("news/"+this.id)
-               window.location.reload()
-            }
-            else{
-                return
-            }
-        }
+    async updateNews(){
+        await api.put("news/"+ this.id, {
+        id:this.id,
+        title:this.changeTitle,
+      },
+      )
+    this.$router.go(0);
+    },
     },
 }
 </script>
 
 <style>
+
 .news__card {
     align-self: center;
     width: 60%;
@@ -140,6 +159,20 @@ export default {
     color: #476160;
     font-weight: 600;
 }
+
+.changeBtn svg{
+  width: 25px;
+  fill: #ffffff;
+}
+.changeBtn{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.changeBtn:active{
+  transform: scale(0.9);
+}
+
 @media (max-width:1024.95px) {
     .news__card{
         width: 90vw;

@@ -6,6 +6,7 @@ import Documents from '../views/Documents.vue'
 import FAQ from '../views/FAQ.vue'
 import Government from '../views/Government.vue'
 import Contacts from '../views/Contacts.vue'
+import Profile from '../views/Profile.vue'
 import Authorization from '../views/Authorization.vue'
 import Registration from '../views/Registration.vue'
 
@@ -41,6 +42,11 @@ const routes = [
     path: '/contacts',
     name: 'Contacts',
     component: Contacts
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
   },
   {
     path: '/authorization',
