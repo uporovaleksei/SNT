@@ -76,12 +76,13 @@ import api from '@/api'
       async updateProfile(){
       console.log(this.file)
       await api.put("/profile", {
-        id:this.userid,
-        phone:this.changedPhone,
-        name:this.changedName,
-        login:this.changedLogin,
-      },
+          id:this.userid,
+          phone:this.changedPhone,
+          name:this.changedName,
+          login:this.changedLogin,
+        },
       )
+      this.$store.dispatch("refresh")
     this.$router.go(0);
     },
     },

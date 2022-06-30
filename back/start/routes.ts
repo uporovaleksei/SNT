@@ -25,6 +25,7 @@ Route.group(() => {
   Route.post('logout', 'UserController.logout')
   Route.post('reg', 'UserController.reg')
   Route.get('/', 'UserController.user').middleware('auth')
+  Route.get('refresh', 'UserController.refresh').middleware('auth')
 }).prefix('user')
 
 Route.group(() => {

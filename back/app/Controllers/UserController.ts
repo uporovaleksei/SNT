@@ -13,6 +13,12 @@ export default class UserController {
     return session.get('user')
   }
 
+  public async refresh({session}: HttpContextContract){
+    const user =  await Database.from(this.tb).where('login', session.get('user').login).first()
+    session.put('user', user)
+    return user
+  }
+
   public async login({ request, session }: HttpContextContract) {
     const { login, password } = request.body()
     const hash = this.hash(login, password)

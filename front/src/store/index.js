@@ -34,6 +34,10 @@ export default new Vuex.Store({
       if(data.error)
         return data
       context.commit("setUser", data)
+    },
+    async refresh(context, payload){
+      const user = await api.get("user/refresh")
+      context.commit("setUser", user)
     }
   },
 })
