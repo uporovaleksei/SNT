@@ -14,21 +14,33 @@
               <input type="text"
               v-if="showChange"
               v-model="changeTitle"
+              :placeholder="title"
               >
-              <button @click="updateNews">send</button>
           </div>
           <div class="news__card__date">
               <p>{{formatDate(date)}}</p>
+              <input type="text"
+              v-model="changeDate"
+              v-if="showChange"
+              >
           </div>
       </div>
       <div class="news__card__image">
        <img  alt="" :src="image"> 
+       <input 
+       type="file"
+       v-if="showChange"
+       >
       </div>
       <div class="news__card__text">
           <div v-html="text">
 
           </div>
       </div>
+        <button 
+              @click="updateNews"
+              v-if="showChange"
+              >Send</button>
       <div class="news__card__comment">
         
           <div class="comment__icon">

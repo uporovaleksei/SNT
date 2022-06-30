@@ -19,11 +19,6 @@
       <div class="user__login">
         <label>Логин:</label>
         {{userlogin}}
-        <input 
-        type="text" 
-        v-if="showChange"
-        v-model="changedLogin"
-        >
       </div>
       <div class="user__phone">
         <label>Телефон:</label>
@@ -54,7 +49,6 @@ import api from '@/api'
         showChange:false,
         changedPhone:null,
         changedName:null,
-        changedLogin:null,
         id:null,
       }
     },
@@ -79,10 +73,9 @@ import api from '@/api'
           id:this.userid,
           phone:this.changedPhone,
           name:this.changedName,
-          login:this.changedLogin,
         },
       )
-      this.$store.dispatch("refresh")
+     await this.$store.dispatch("refresh")
     this.$router.go(0);
     },
     },
