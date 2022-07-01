@@ -24,6 +24,7 @@
                     >
                         <div class="user">
                             <div class="user__avatar">
+                                {{item.username.charAt(0).toUpperCase()}}
                             </div>
                             <div class="user__data">
                                 <div class="user__name">
@@ -165,10 +166,16 @@ export default {
     gap: 20px   ;
 }
 .user__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 70px;
     height: 65px;
     background: #476160;
     border-radius: 100%;
+    font-size: 2.5rem;
+    color: #fff;
+
 }
 .user__data {
 display: flex;

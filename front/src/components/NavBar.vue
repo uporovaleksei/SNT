@@ -229,7 +229,7 @@ export default {
     transition: 0.3s;
 }
 
-.actions__username{
+.actions__username a{
     color: #fff;
     font-size: 1.2rem;
     font-weight: 500;

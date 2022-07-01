@@ -43,30 +43,58 @@
     <div 
     class="documents__body">
       <div class="document__item"
-          v-for="item in items"
-          :key="item.id"
+          v-for="(item,index) in items"
+          :index="index"
+          :key="index"
           :id="item.id"
           >
         <DeleteBtn
             v-if="isAdmin" 
             :id="item.id" 
             :name="tbname"
+            class="deleteBtn"
         />
+        <div class="changeButton"
+        >
+            <button 
+            class="changeBtn"
+            v-if="isAdmin"
+            @click="showChange =! showChange"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M490.3 40.4C512.2 62.27 512.2 97.73 490.3 119.6L460.3 149.7L362.3 51.72L392.4 21.66C414.3-.2135 449.7-.2135 471.6 21.66L490.3 40.4zM172.4 241.7L339.7 74.34L437.7 172.3L270.3 339.6C264.2 345.8 256.7 350.4 248.4 353.2L159.6 382.8C150.1 385.6 141.5 383.4 135 376.1C128.6 370.5 126.4 361 129.2 352.4L158.8 263.6C161.6 255.3 166.2 247.8 172.4 241.7V241.7zM192 63.1C209.7 63.1 224 78.33 224 95.1C224 113.7 209.7 127.1 192 127.1H96C78.33 127.1 64 142.3 64 159.1V416C64 433.7 78.33 448 96 448H352C369.7 448 384 433.7 384 416V319.1C384 302.3 398.3 287.1 416 287.1C433.7 287.1 448 302.3 448 319.1V416C448 469 405 512 352 512H96C42.98 512 0 469 0 416V159.1C0 106.1 42.98 63.1 96 63.1H192z"/></svg>
+            </button> 
+          </div>
         <div class="document__icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 64C0 28.65 28.65 0 64 0H229.5C246.5 0 262.7 6.743 274.7 18.75L365.3 109.3C377.3 121.3 384 137.5 384 154.5V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM336 448V160H256C238.3 160 224 145.7 224 128V48H64C55.16 48 48 55.16 48 64V448C48 456.8 55.16 464 64 464H320C328.8 464 336 456.8 336 448z"/></svg>
         </div>
         <div class="document__info">
         <div class="document__title">
           <h1>{{item.title}}</h1>
+          <input 
+          type="text"
+          v-model="item.title"
+          v-if="showChange"
+          :placeholder="item.title"
+          >
         </div>
 
         <div class="document__url">
           <a 
             :href="item.document"  
             :download="item.name"
-          >{{item.name}} + {{item.id}}</a>
+          >{{item.name}}</a>
         </div>
+          <input 
+          type="file"
+          v-if="showChange"
+          @change ="ChangehandleFileUpload"
+          >
         </div>
+                <button 
+              @click="updateDocs(item.id)"
+              v-if="showChange"
+              class="sendBtn"
+              >Подтвердить</button>
       </div>
     </div>
   </div>
@@ -90,9 +118,14 @@ import DeleteBtn from "@/components/DeleteBtn.vue"
       show: false,
       file: null,
       title: null,
+      changeTitle:null,
+      changeDocument:null,
       document: null,
       tbname:'documents',
+      showChange: false,
       name:null,
+      changeName:null,
+      id:null,
       items:[],
     }
   },
@@ -119,6 +152,20 @@ import DeleteBtn from "@/components/DeleteBtn.vue"
       })
 
     },
+    ChangehandleFileUpload(event){
+      const files = Array.from(event.target.files)
+      files.forEach(file => {
+        const reader = new FileReader()
+        this.changeName = file.name
+        console.log(this.changeName)
+        reader.onload = ev =>{
+          const src = ev.target.result
+          this.changeDocument = src
+        }
+        reader.readAsDataURL(file)
+      })
+
+    },
     async createDocs(){
       await api.post("documents", {
         name:this.name,
@@ -130,6 +177,16 @@ import DeleteBtn from "@/components/DeleteBtn.vue"
     },
     async getDocs(){
       this.items = await api.get('/documents')
+    },
+    async updateDocs(id){
+        await api.put("documents/"+ id, {
+        id:id,
+        title:this.item.title,
+        name:this.changeName,
+        document:this.changeDocument,
+      },
+      )
+    this.$router.go(0);
     },
     async del(id){
         let accept = confirm("Удалить элемент?");
@@ -147,6 +204,15 @@ import DeleteBtn from "@/components/DeleteBtn.vue"
 </script>
 
 <style>
+.deleteBtn{
+  align-self: center !important;
+}
+.changeButton{
+  align-self: center;
+}
+.changeButton button {
+  align-self: center;
+}
 .document__icon svg{
   width: 30px;
   fill: #476160;
@@ -173,6 +239,7 @@ import DeleteBtn from "@/components/DeleteBtn.vue"
 .document__item {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 20px;
 }
 .create__image input{

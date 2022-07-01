@@ -16,7 +16,7 @@ export default new Vuex.Store({
     },
     setUser(state, user){
       state.user = user
-    }
+    },
   },
   actions: {
     async login(context, payload){
@@ -37,6 +37,8 @@ export default new Vuex.Store({
     },
     async refresh(context){
       const user = await api.get("user/refresh")
+      if(user.error)
+        return user
       context.commit("setUser", user)
     }
   },

@@ -13,6 +13,12 @@ export default class NewsController {
     
   }
 
+  public async update({request }: HttpContextContract) {
+    const {id,image,name,status,phone,email} = request.body()
+    let query = `UPDATE ${this.tb} SET image = '${image}', name = '${name}', status = '${status}', phone = '${phone}', email = '${email}' WHERE id= ${id}`
+    return (await Database.rawQuery(query)).rows
+  }
+
   public async create({ request }: HttpContextContract) {
     await Database.table(this.tb).insert(request.body())
   }

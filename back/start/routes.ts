@@ -43,16 +43,19 @@ Route.group(() => {
   Route.get('/', 'DocsController.index')
   Route.post('/', 'DocsController.create')
   Route.delete('/:id', 'DocsController.delete')
+  Route.put('/:id', 'DocsController.update')
 }).prefix('documents')
 Route.group(() => {
   Route.get('/:limit?', 'GovernmentController.index')
   Route.post('/', 'GovernmentController.create')
   Route.delete ('/:id', 'GovernmentController.delete')
+  Route.put('/:id', 'GovernmentController.update')
 }).prefix('government')
 Route.group(() => {
   Route.get('/', 'ContactsController.index')
   Route.post('/', 'ContactsController.create')
   Route.delete ('/:id', 'ContactsController.delete')
+  Route.put('/:id', 'ContactsController.update')
 }).prefix('contacts')
 Route.group(() => {
   Route.put('/', 'ProfileController.update')

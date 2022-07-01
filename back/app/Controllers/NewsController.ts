@@ -16,8 +16,8 @@ export default class NewsController {
     await Database.table(this.tb).insert(request.body())
   }
   public async update({request }: HttpContextContract) {
-    const {id,title} = request.body()
-    let query = `UPDATE ${this.tb} SET title = '${title}' WHERE id= ${id}`
+    const {id,title,date,image,text} = request.body()
+    let query = `UPDATE ${this.tb} SET title = '${title}', date = '${date}',image = '${image}', text = '${text}' WHERE id= ${id}`
     return (await Database.rawQuery(query)).rows
   }
 
