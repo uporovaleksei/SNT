@@ -71,6 +71,7 @@ import AuthLayout from "@/layouts/Auth.vue";
   display: flex;
   justify-content: center;
   align-items: center;
+  background:linear-gradient(#293636bd,#293636bd), url('../assets/auth_back.jpg') no-repeat;
 }
 .auth__container {
   display: flex;

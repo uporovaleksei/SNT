@@ -38,7 +38,7 @@
           <div class="reg__password">
             <input 
               type="text" 
-              placeholder="phone"
+              placeholder="Телефон"
               v-model="phone"
             >
           </div>
@@ -117,6 +117,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background:linear-gradient(#293636bd,#293636bd), url('../assets/reg_back.jpg') no-repeat;
 }
 .reg__container {
   display: flex;
@@ -124,7 +125,8 @@
   align-content: center;
 }
 .reg__body {
-  background: #d3e1e0;
+  background: #d3e1e0d2;
+  border: 2px solid #476160;
   display: flex;
   justify-content: center;
   align-items: center;

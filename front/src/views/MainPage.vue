@@ -52,7 +52,7 @@ export default {
     background:linear-gradient(#293636bd,#293636bd), url('../assets/back.jpg') no-repeat;
     background-size: 100% 100%;
     width: 100%;
-    height: 70vh;
+    height: 90vh;
 }
 
 .header__container {

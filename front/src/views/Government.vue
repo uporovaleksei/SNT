@@ -59,8 +59,9 @@
           <div class="government__body">
             <div 
             class="government__item"
-            v-for="item in items"
-            :key="item.id"
+            v-for="(item,index) in items"
+            :key="index"
+            :index="index"
             >
             <DeleteBtn
             v-if="isAdmin" 
@@ -71,24 +72,13 @@
             <div class="changeButton">
             <button 
             class="changeBtn"
-            @click="showChange =! showChange" 
+            @click="change(index, item)" 
             v-if="isAdmin">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M490.3 40.4C512.2 62.27 512.2 97.73 490.3 119.6L460.3 149.7L362.3 51.72L392.4 21.66C414.3-.2135 449.7-.2135 471.6 21.66L490.3 40.4zM172.4 241.7L339.7 74.34L437.7 172.3L270.3 339.6C264.2 345.8 256.7 350.4 248.4 353.2L159.6 382.8C150.1 385.6 141.5 383.4 135 376.1C128.6 370.5 126.4 361 129.2 352.4L158.8 263.6C161.6 255.3 166.2 247.8 172.4 241.7V241.7zM192 63.1C209.7 63.1 224 78.33 224 95.1C224 113.7 209.7 127.1 192 127.1H96C78.33 127.1 64 142.3 64 159.1V416C64 433.7 78.33 448 96 448H352C369.7 448 384 433.7 384 416V319.1C384 302.3 398.3 287.1 416 287.1C433.7 287.1 448 302.3 448 319.1V416C448 469 405 512 352 512H96C42.98 512 0 469 0 416V159.1C0 106.1 42.98 63.1 96 63.1H192z"/></svg>
             </button> 
           </div>
-                        <button 
-              @click="updateGovernment(item.id)"
-              v-if="showChange"
-              class="sendBtn"
-              >Подтвердить</button>
               <div class="government__photo">
                 <img :src="item.image" alt="">
-                <input 
-                type="file"
-                v-if="showChange"
-                :key="item.id"
-                @change ="ChangehandleFileUpload"
-                >
               </div>
               <div class="government__info">
                 <div class="government__name">
@@ -99,8 +89,7 @@
                   <input 
                   type="text"
                   v-model="changeName"
-                  v-if="showChange"
-                  :placeholder="item.name"
+                  v-if="changedId === index"
                   >
                 </div>
                 <div class="government__status">
@@ -111,8 +100,7 @@
                   <input 
                   type="text"
                   v-model="changeStatus"
-                  v-if="showChange && items[0]"
-                  :placeholder="item.status"
+                  v-if="changedId === index"
                   >
                 </div>
                 <div class="government___phone">
@@ -123,8 +111,7 @@
                   <input 
                   type="text"
                   v-model="changePhone"
-                  v-if="showChange"
-                  :placeholder="item.phone"
+                  v-if="changedId === index"
                   >
                 </div>
                 <div class="government__email">
@@ -135,10 +122,15 @@
                   <input 
                   type="text"
                   v-model="changeEmail"
-                  v-if="showChange && item.id"
-                  :placeholder="item.email"
+                  v-if="changedId === index"
+
                   >
                 </div>
+                        <button 
+              @click="updateGovernment(item.id)"
+              v-if="changedId === index"
+              class="sendBtn"
+              >Подтвердить</button>
               </div>
             </div>
           </div>
@@ -170,6 +162,7 @@ import api from "@/api"
         image:null,
         preview: null,
         showChange:false,
+        changedId:-1,
         changeImage:null,
         changeName:null,
         changeStatus:null,
@@ -211,7 +204,6 @@ import api from "@/api"
         reader.readAsDataURL(file)
       })
     },
-    
     ChangehandleFileUpload(event){
       const files = Array.from(event.target.files)
       files.forEach(file => {
@@ -238,6 +230,13 @@ import api from "@/api"
     async getGovernment(){
       this.items = await api.get('/government')
     },
+     change(index, item){
+      this.changedId = index
+      this.changeName = item.name
+      this.changeStatus = item.status
+      this.changePhone = item.phone
+      this.changeEmail = item.email
+    },
     async del(id){
     let accept = confirm("Удалить элемент?");
     if(accept){
@@ -253,6 +252,9 @@ import api from "@/api"
   }
 </script>
 <style scoped>
+.changeButton{
+  align-self: flex-start;
+}
 .DeleteButton{
   align-self: flex-start;
 }
@@ -288,6 +290,7 @@ import api from "@/api"
   flex-direction: column;
   width: 300px;
   height: 100%;
+  min-height: 300px;
   background: #476160;
 }
 .government__photo input{

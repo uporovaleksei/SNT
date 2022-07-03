@@ -31,7 +31,7 @@
         >
       </div>
     </div>
-    <button @click="updateProfile">Изменить</button>
+    <button @click="updateProfile" v-if="showChange">Изменить</button>
   </div>
 </MainLayout>
 </template>

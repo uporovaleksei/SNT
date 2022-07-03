@@ -16,4 +16,9 @@ export default class NewsController {
     let query = `DELETE FROM ${this.tb} WHERE id=${params.id}`
     return (await Database.rawQuery(query)).rows
   }
+  public async update({request}: HttpContextContract) {
+    const {id,title,text} = request.body()
+    let query = `UPDATE ${this.tb} SET title = '${title}', text = '${text}' WHERE id= ${id}`
+    return (await Database.rawQuery(query)).rows
+  }
 }
