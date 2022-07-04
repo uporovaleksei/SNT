@@ -218,7 +218,7 @@ export default {
     text-align: center;
 }
 .news__card__image input{
-    margin: 40px;
+
 }
 .news__card__image img{
     width: 60%;

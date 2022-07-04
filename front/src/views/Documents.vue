@@ -39,6 +39,7 @@
   <div class="documents__container">
     <div class="docuuments__title">
         <h1>Документы</h1>
+        <p></p>
     </div>
     <div 
     class="documents__body">
@@ -242,7 +243,7 @@ import DeleteBtn from "@/components/DeleteBtn.vue"
   display: flex;
   flex-direction: column;
   margin: 40px 0;
-  gap: 20px;
+  gap: 60px;
 }
 .document__item {
   display: flex;

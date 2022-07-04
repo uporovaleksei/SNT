@@ -219,7 +219,7 @@ textarea{
 .contacts__body {
 display: flex;
 flex-direction: column;
-gap: 20px;
+gap: 40px;
 margin: 40px 0;
 }
 .contacts__item {
@@ -238,9 +238,12 @@ margin: 40px 0;
   gap: 2px;
   justify-content: flex-start;
 }
-.contacts__info__title {
+.contacts__info__title h1{
+  font-size: 1.2rem;
+  color: #476160;
 }
-.contacts__info__text {
+.contacts__info__text p{
+  font-size: 1.2rem;
 }
 
 .contacts__create__container{

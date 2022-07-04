@@ -17,7 +17,14 @@ export default class NewsController {
   }
   public async update({request }: HttpContextContract) {
     const {id,title,date,image,text} = request.body()
-    let query = `UPDATE ${this.tb} SET title = '${title}', date = '${date}',image = '${image}', text = '${text}' WHERE id= ${id}`
+    let query
+    if (image == null || date == null){
+      
+      query = `UPDATE ${this.tb} SET title = '${title}', text = '${text}' WHERE id= ${id}`
+    }
+    else {
+      query = `UPDATE ${this.tb} SET title = '${title}', date = '${date}',image = '${image}', text = '${text}' WHERE id= ${id}`
+    }
     return (await Database.rawQuery(query)).rows
   }
 

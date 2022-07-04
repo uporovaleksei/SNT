@@ -18,7 +18,7 @@
                 </div>
                 </div>
                     <div
-                        v-for="item in items"
+                        v-for="item in paginatedData"
                         :key="item.id"
                         class="reviews__commentary"
                     >
@@ -43,6 +43,29 @@
                                 </div>
                             </div>
                         </div>
+                   
+                   
+                    </div>
+                    <div class="page__btn">
+                    <button 
+                    @click="prevPage"
+                    :disabled="pageNumber==0">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/></svg>
+                    </button>
+                    <ul class="dots">
+                    <li 
+                    v-for="(dot, index) in pageCount"
+                    :key="index"
+                    :class="{ active: index === active  }"
+                    @click="jump(index)"
+                    ></li>
+                    </ul>
+                    <button
+                     @click="nextPage"
+                    :disabled="pageNumber >= pageCount-1"
+                    >
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"/></svg>
+                    </button>
                     </div>
                 </div>
             </div>
@@ -58,12 +81,19 @@ export default {
         id: {
             type: Number,
             default: 0
+        },
+        size:{
+        type:Number,
+        required:false,
+        default: 5
         }
     },
     data() {
         return {
             text: null,
-            items: []
+            items: [],
+            active: 0,
+            pageNumber: 0
         }
     },
     created(){
@@ -75,9 +105,31 @@ export default {
     computed: {
         user(){
             return this.$store.state.user
-        }
+        },
+        pageCount(){
+        let l = this.items.length,
+        s = this.size;
+        return Math.ceil(l/s);
+        },
+        paginatedData(){
+        const start = this.pageNumber * this.size,
+        end = start + this.size;
+        return this.items.slice(start, end);
+    }
     },
     methods: {
+        jump(index) {
+        this.active = index
+        this.pageNumber = index
+    },
+        nextPage(){
+         this.pageNumber++;
+         this.active++
+      },
+      prevPage(){
+        this.pageNumber--;
+        this.active--
+      },
         async send(){
             if(!this.text){
                 alert("Введите текст")
@@ -109,6 +161,38 @@ export default {
 </script>
 
 <style scoped>
+.dots{
+    margin: 0;
+    width:15%;
+}
+.page__btn{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    transition: 0.3s;
+
+}
+.page__btn button{
+    border-radius: 50%;
+    width: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+}
+.page__btn button:disabled{
+    opacity: 0.2;
+}
+.page__btn button:active{
+    transform: scale(0.95);
+}
+.page__btn svg{
+    width: 10px;
+}
 .reviews {
     width: 100%;
     margin: 20px 0;
@@ -212,6 +296,7 @@ gap: 40px;
     .user__avatar {
         width: 30px;
         height: 30px;
+        font-size: 1rem;
 }
 }
 </style>

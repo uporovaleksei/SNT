@@ -79,6 +79,11 @@
           </div>
               <div class="government__photo">
                 <img :src="item.image" alt="">
+                <input 
+                type="file"
+                v-if="changedId === index"
+                @change ="ChangehandleFileUpload"
+                >
               </div>
               <div class="government__info">
                 <div class="government__name">
