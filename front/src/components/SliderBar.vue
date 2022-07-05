@@ -172,7 +172,7 @@ import api from "@/api"
 .slider__card__image img{
     width: 100%;
     min-width: 300px;
-    height: 300px;
+    min-height: 300px;
     background: #476160;
     border: #476160 solid 1px;
 }

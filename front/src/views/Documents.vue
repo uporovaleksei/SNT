@@ -237,6 +237,7 @@ import DeleteBtn from "@/components/DeleteBtn.vue"
 .documents__container {
   width: 80%;
   margin: 0 auto;
+  margin-bottom: 180px;
 }
 .docuuments__title h1{
   font-size: 2rem;

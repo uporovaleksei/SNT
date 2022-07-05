@@ -180,7 +180,7 @@ export default {
 .news__card__title h1{
     color: #111111;
     font-size: 1.5rem;
-    text-align: center;
+    text-align: justify;
 }
 .news__card__title input{
   width: 100%;
@@ -222,7 +222,7 @@ export default {
 }
 .news__card__text {
     margin: 20px 0;
-    text-align: center;
+    text-align: justify;
 }
 .news__card__text textarea{
     margin: 20px 0;

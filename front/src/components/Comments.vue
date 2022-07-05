@@ -185,7 +185,7 @@ export default {
     height: 30px;
 }
 .page__btn button:disabled{
-    opacity: 0.2;
+    opacity: 0;
 }
 .page__btn button:active{
     transform: scale(0.95);
