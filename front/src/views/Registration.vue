@@ -31,7 +31,7 @@
           <div class="reg__password">
             <input 
               type="text" 
-              placeholder="name"
+              placeholder="Имя"
               v-model="name"
             >
           </div>
@@ -81,7 +81,7 @@
           alert("Пароли не совпадают")
           return
         }
-        const minPassword = 1
+        const minPassword = 6
         if(this.password1?.length < minPassword){
           alert(`Пароль должен содержать минимум ${minPassword} символов`)
           return
@@ -147,8 +147,6 @@
 .reg__login input:focus, .reg__password input:focus{
   padding: 10px 25px;
   border: 1px solid #80d1cd;
-}
-.reg__password {
 }
 .reg__submit {
   width: 100%;

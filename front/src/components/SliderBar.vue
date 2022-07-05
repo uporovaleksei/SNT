@@ -18,7 +18,13 @@
                         >
                             <div class="slider__card">
                                 <div class="slider__card__image">
-                                    <img :src="item.image" alt="">
+                                    <img 
+                                    :src="item.image"
+                                    v-if="item.image"
+                                    alt="">
+                                    <p
+                                    v-if="!item.image"
+                                    >{{item.name.split(' ')[0]}}</p>
                                 </div>
                                 <div class="slider__card__name">
                                     {{item.name}}
@@ -165,9 +171,26 @@ import api from "@/api"
 
 .slider__card__image img{
     width: 100%;
+    min-width: 300px;
     height: 300px;
     background: #476160;
     border: #476160 solid 1px;
+}
+.slider__card__image p{
+height: 300px;
+width: 300px;
+background: #476160;
+color: #fff;
+font-weight: 500;
+font-size: 2rem;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.slider__card__image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .slider__card__name {
     text-align: center;

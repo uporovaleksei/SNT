@@ -163,17 +163,12 @@ export default {
 .menu__icon {
     display: none;
 }
-
-.menu__body {}
-
 .menu__list {
     display: flex;
     justify-content: flex-end;
     align-items: baseline;
     gap: 35px;
 }
-
-.menu__item {}
 
 .menu__item:hover {
     transform: translateY(-2px);

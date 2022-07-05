@@ -78,7 +78,14 @@
             </button> 
           </div>
               <div class="government__photo">
-                <img :src="item.image" alt="">
+
+                <img 
+                :src="item.image"
+                v-if="item.image"
+                 alt="">
+                <p
+                v-if="!item.image"
+                >{{item.name.split(' ')[0]}}</p>
                 <input 
                 type="file"
                 v-if="changedId === index"
@@ -293,9 +300,9 @@ import api from "@/api"
 .government__photo{
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 300px;
-  height: 100%;
-  min-height: 300px;
   background: #476160;
 }
 .government__photo input{
@@ -307,9 +314,15 @@ import api from "@/api"
 .government__photo img{
   width: 300px;
   height: 100%;
+
   border: #476160 2px solid;
 }
-.government__photo,.government__name, .government__status, .government___phone, .government__email{
+.government__photo p{
+  font-size: 2rem;
+  color: #fff;
+  font-weight: 500;
+}
+.government__name, .government__status, .government___phone, .government__email{
   display: flex;
   align-items: baseline;
   gap: 10px;
@@ -320,15 +333,6 @@ import api from "@/api"
   justify-content: space-around;
   gap: 20px;
 }
-.government__name {
-}
-.government__status {
-}
-.government___phone {
-}
-.government__email {
-}
-
 .government__create__container{
   width: 60%;
   margin: 160px auto 0 auto;

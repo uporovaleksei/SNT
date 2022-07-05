@@ -217,9 +217,6 @@ export default {
     align-self: center;
     text-align: center;
 }
-.news__card__image input{
-
-}
 .news__card__image img{
     width: 60%;
 }

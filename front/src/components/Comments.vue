@@ -22,28 +22,28 @@
                         :key="item.id"
                         class="reviews__commentary"
                     >
-                        <div class="user">
-                            <div class="user__avatar">
-                                {{item.username.charAt(0).toUpperCase()}}
+                <div class="user">
+                    <div class="user__avatar">
+                        {{item.username.charAt(0).toUpperCase()}}
+                    </div>
+                    <div class="user__data">
+                        <div class="user__name">
+                            {{item.username}}
+                        </div>
+                        <div class="user__comment">
+                            <p>{{item.text}}</p>
+                        </div>
+                        <div class="comment__actions">
+                            <div class="comment__date">
+                                {{formatDate(item.date)}}
                             </div>
-                            <div class="user__data">
-                                <div class="user__name">
-                                    {{item.username}}
-                                </div>
-                                <div class="user__comment">
-                                    <p>{{item.text}}</p>
-                                </div>
-                                <div class="comment__actions">
-                                    <div class="comment__date">
-                                        {{formatDate(item.date)}}
-                                    </div>
-                                    <div class="comment__answer">
-                                        <a @click="text = item.username+', '">Ответить</a>
-                                    </div>
-                                </div>
+                            <div class="comment__answer">
+                                <a @click="text = item.username+', '">Ответить</a>
                             </div>
                         </div>
-                   
+                    </div>
+                </div>
+            
                    
                     </div>
                     <div class="page__btn">

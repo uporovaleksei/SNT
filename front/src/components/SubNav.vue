@@ -46,19 +46,6 @@
     font-weight: 600;
     color: #476160;
 }
-.subnav__geo {
-}
-.geo__icon {
-}
-.geo__label {
-}
-.subnav__phone {
-}
-.phone__icon {
-}
-.phone__label {
-}
-
 @media (min-width: 769px) and (max-width:1024.85px) {
     .subnav{
         margin-top: 120px;

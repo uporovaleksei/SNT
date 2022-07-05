@@ -26,8 +26,6 @@ canvas{
     left: 0;
 }
 
-.wrapper {}
-
 .navbar a {
     color: #fff;
 }
@@ -75,16 +73,12 @@ canvas{
     display: none;
 }
 
-.menu__body {}
-
 .menu__list {
     display: flex;
     justify-content: flex-end;
     align-items: baseline;
     gap: 35px;
 }
-
-.menu__item {}
 
 .menu__item:hover {
     transform: translateY(-2px);
@@ -167,18 +161,6 @@ canvas{
     font-weight: 600;
     color: #476160;
 }
-.subnav__geo {
-}
-.geo__icon {
-}
-.geo__label {
-}
-.subnav__phone {
-}
-.phone__icon {
-}
-.phone__label {
-}
 .header{
     background:linear-gradient(#293636bd,#293636bd), url('/templates/back.jpg') no-repeat;
     background-size: 100% 100%;
@@ -257,10 +239,6 @@ canvas{
 .news__card__comment {
     align-self: flex-start;
 }
-.comment__icon {
-}
-.comment__count {
-}
 .news__commentary {
     background: rgb(231, 231, 231);
     width: 60%;
@@ -288,8 +266,6 @@ gap: 10px;
     font-size: 1.1rem;
     color: #476160;
     font-weight: 600;
-}
-.user__comment {
 }
 .comment__actions {
 display: flex;
@@ -399,26 +375,6 @@ gap: 40px;
     font-weight: 600;
     color: #476160;
     margin: 40px 0;
-}
-.reviews__body {
-}
-.reviews__commentary {
-}
-.user {
-}
-.user__avatar {
-}
-.user__data {
-}
-.user__name {
-}
-.user__comment {
-}
-.comment__actions {
-}
-.comment__date {
-}
-.comment__answer {
 }
 .subuser {
     margin: 20px 40px;
